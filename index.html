@@ -766,12 +766,6 @@ body.rk-as-open #rk-assistant-btn{display:none!important}
   #rk-bn-badge{position:absolute;top:-2px;right:2px;min-width:16px;height:16px;border-radius:99px;background:rgb(var(--rk-red));color:#fff;font-size:10px;display:grid;place-items:center;padding:0 4px}
   #rk-bn-badge[hidden]{display:none}
   /* footer */
-  footer{background:rgb(var(--rk-navy))!important;padding-top:26px!important}
-  footer,footer p,footer span,footer li,footer a,footer div{color:#cbd5e1}
-  footer h4,footer h3,footer .font-bold{color:#fff!important}
-  footer .rk-logo{background:rgb(255 255 255/.1)}
-  footer .border-b,footer .border-t,footer [class*=border-border]{border-color:rgb(255 255 255/.12)!important}
-  footer .grid{gap:18px!important;grid-template-columns:1fr 1fr!important}footer .grid>div:first-child{grid-column:1/-1}
 }
 @media(prefers-reduced-motion:reduce){.rk-cd,.rk-dialog{animation:none}}
 
@@ -895,13 +889,220 @@ body.rk-as-open #rk-assistant-btn{display:none!important}
 @media(prefers-reduced-motion:reduce){.rk-trk-dot{animation:none}}
 @media(max-width:767px){#rk-bnav button{font-size:10px}.rk-bn-i{width:38px}}
 
+/* ===== Round 6: light design tokens + decluttered chrome ===== */
+:root{
+  /* colour: same family, lighter surfaces; navy for text/header/primary buttons, red for key CTAs only */
+  --c-navy:0 24 49;--c-red:227 43 72;--c-bg:251 250 248;--c-soft:244 242 239;--c-text:24 28 32;--c-muted:98 105 114;
+  /* spacing scale */ --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:72px;
+  /* radius */ --r-sm:12px;--r-md:18px;--r-lg:24px;--r-xl:32px;
+  /* shadow */ --sh-1:0 1px 2px rgb(0 24 49/.04);--sh-2:0 6px 22px -12px rgb(0 24 49/.14);--sh-3:0 20px 48px -24px rgb(0 24 49/.26);
+  /* type scale (3 weights: 400 / 600 / 700) */ --f-xs:12px;--f-sm:14px;--f-md:16px;--f-lg:20px;--f-xl:28px;--f-2xl:40px;
+  /* legacy aliases so every earlier component picks the tokens up */
+  --rk-canvas:251 250 248;--rk-line:236 233 229;--rk-r-md:18px;--rk-r-lg:24px;--rk-sh1:var(--sh-1);--rk-sh2:var(--sh-2);--rk-sh3:var(--sh-3)}
+body,main[data-view]{background:rgb(var(--c-bg))!important}
+main[data-view]{padding-top:calc(var(--rk-hdr,76px) + var(--s6))!important;padding-bottom:var(--s7)}
+.rk-h2,.rk-sec-title{font-size:clamp(24px,2.4vw,32px);font-weight:700;letter-spacing:-.01em;line-height:1.15;color:rgb(var(--c-navy))}
+.rk-sec-title{margin-top:var(--s7)}
+/* ---- cards: no borders, soft shadow, bigger radius ---- */
+.rk-card,.rk-combo,.rk-panel,.rk-oc,.rk-dh,.rk-dsec,.rk-qa,.rk-face,.rk-trk-card,.rk-tile,.rk-od-tabs,.rk-od-empty,.rk-toolbar,.rk-side,#saved-addresses,.rk-hero2-r{border-color:transparent!important;border-radius:var(--r-lg);box-shadow:var(--sh-2)}
+.rk-tile{box-shadow:var(--sh-1)}.rk-tile:hover{box-shadow:var(--sh-2)}
+.rk-chip,.rk-hr-chip,.rk-own-chip{border-color:transparent;background:rgb(var(--c-soft))}
+.rk-chip.on,.rk-hr-chip.on,.rk-own-chip.on{background:rgb(var(--c-navy));color:#fff}
+.rk-btn{border-radius:14px;font-weight:600}
+.rk-mp-badge{background:rgb(var(--c-red));color:#fff;box-shadow:var(--sh-2)}
+.rk-top-head h2{font-size:clamp(24px,2.4vw,32px);font-weight:700;color:rgb(var(--c-navy))}.rk-top-head h2 span{color:rgb(var(--c-red))}
+.rk-cm .rk-tile{border-radius:16px}.rk-cm .rk-tile-stage{border-radius:16px 16px 0 0}
+/* ---- header: logo, city, search, cart, account ---- */
+.rk-hdr{position:fixed;top:0;left:0;right:0;z-index:50;background:rgb(255 255 255/.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgb(0 24 49/.06)}
+.rk-hdr-in{max-width:80rem;margin:0 auto;padding:var(--s3) var(--s5);display:flex;align-items:center;gap:var(--s4)}
+.rk-loc{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 14px 0 12px;border-radius:99px;background:rgb(var(--c-soft));border:0;font:600 14px/1 inherit;color:rgb(var(--c-navy));cursor:pointer;white-space:nowrap;flex-shrink:0}
+.rk-loc:hover{background:rgb(var(--c-navy)/.08)}
+.rk-loc .material-symbols-outlined{font-size:20px;width:20px;overflow:hidden}
+.rk-search-wrap{flex:1 1 0;min-width:0;max-width:44rem;margin:0 auto}
+.rk-search-wrap input{height:46px;border-radius:99px;border:1.5px solid transparent;background:rgb(var(--c-soft));box-shadow:none;font-size:15px;font-weight:400;padding:0 18px 0 48px}
+.rk-search-wrap input:focus{background:#fff;border-color:rgb(var(--c-navy)/.5);box-shadow:0 0 0 4px rgb(var(--c-navy)/.08)}
+.rk-search-wrap .material-symbols-outlined{top:11px;left:16px;font-size:24px}
+.rk-ic{position:relative;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:transparent;border:0;color:rgb(var(--c-navy));cursor:pointer;flex-shrink:0;text-decoration:none}
+.rk-ic:hover{background:rgb(var(--c-soft))}.rk-ic .material-symbols-outlined{font-size:26px;width:26px;overflow:hidden}
+.rk-cnt{position:absolute;top:1px;right:0;min-width:18px;height:18px;border-radius:99px;background:rgb(var(--c-red));color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;padding:0 4px}
+.rk-hub,.rk-m-notice,.rk-m-offers{display:none!important}
+/* ---- home rhythm: one headline per section, lots of air ---- */
+[data-view=home] section{margin-bottom:var(--s8)}
+.rk-sh{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s5)}
+.rk-sh h2{font-size:clamp(24px,2.4vw,32px);font-weight:700;letter-spacing:-.01em;line-height:1.15;color:rgb(var(--c-navy))}
+.rk-hero2{margin-bottom:var(--s8)}
+.rk-hr-h1{font-size:clamp(34px,4vw,52px);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:rgb(var(--c-navy));margin:0 0 var(--s3)}.rk-hr-h1 span{color:rgb(var(--c-muted))}
+.rk-hr-p{font-size:18px;color:rgb(var(--c-muted));margin:0}
+.rk-slider{display:flex;gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 2px 16px;margin:0 -2px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.rk-slider::-webkit-scrollbar{display:none}.rk-slider>*{flex:0 0 auto;scroll-snap-align:start}
+.rk-offer{width:248px;background:#fff;border-radius:var(--r-lg);padding:var(--s5);box-shadow:var(--sh-2);display:flex;flex-direction:column;gap:var(--s2)}
+.rk-offer .rk-code{align-self:flex-start;font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.06em;background:rgb(var(--c-soft));color:rgb(var(--c-navy));border-radius:99px;padding:4px 10px}
+.rk-offer b{font-size:var(--f-lg);line-height:1.2;color:rgb(var(--c-navy));font-weight:700}.rk-offer small{font-size:var(--f-sm);color:rgb(var(--c-muted))}
+.rk-ben{width:224px;background:#fff;border-radius:var(--r-lg);padding:var(--s5);box-shadow:var(--sh-2);display:flex;flex-direction:column;gap:var(--s2)}
+.rk-ben .ic{width:44px;height:44px;border-radius:14px;background:rgb(var(--c-soft));display:grid;place-items:center;color:rgb(var(--c-navy));margin-bottom:var(--s2)}
+.rk-ben .ic .material-symbols-outlined{font-size:24px;width:24px;overflow:hidden}
+.rk-ben b{font-size:var(--f-md);font-weight:700;color:rgb(var(--c-navy));line-height:1.25}.rk-ben small{font-size:var(--f-sm);color:rgb(var(--c-muted))}
+.rk-step-card{width:224px;background:#fff;border-radius:var(--r-lg);padding:var(--s5);box-shadow:var(--sh-2);display:flex;flex-direction:column;gap:var(--s2)}
+.rk-step-card .n{font-size:var(--f-2xl);font-weight:700;color:rgb(var(--c-navy)/.14);line-height:1}
+.rk-step-card b{font-size:var(--f-md);font-weight:700;color:rgb(var(--c-navy))}.rk-step-card small{font-size:var(--f-sm);color:rgb(var(--c-muted))}
+@media(min-width:1024px){#rk-trust .rk-slider>*,#rk-how .rk-slider>*{flex:1 1 0;width:auto}}
+.rk-rvc{width:min(320px,82vw);background:#fff;border-radius:var(--r-lg);padding:var(--s5);box-shadow:var(--sh-2);display:flex;flex-direction:column;gap:var(--s4);justify-content:space-between}
+.rk-rvc p{font-size:var(--f-md);line-height:1.55;color:rgb(var(--c-text));display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;margin:0}
+.rk-rvc b{display:block;font-size:var(--f-sm);color:rgb(var(--c-navy))}.rk-rvc small{font-size:var(--f-xs);color:rgb(var(--c-muted))}
+.rk-cmp{background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh-2);overflow:hidden}
+.rk-cmp-row{display:grid;grid-template-columns:1.1fr 1.2fr 1fr 1fr;gap:var(--s3);padding:var(--s4) var(--s5);align-items:center;font-size:var(--f-md);color:rgb(var(--c-text))}
+.rk-cmp-row+.rk-cmp-row{border-top:1px solid rgb(var(--c-navy)/.06)}
+.rk-cmp-row.hd{font-size:var(--f-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgb(var(--c-muted));padding-top:var(--s5)}
+.rk-cmp-row b{color:rgb(var(--c-navy));font-weight:600}.rk-cmp-row .r{font-weight:700;color:rgb(var(--c-navy));background:rgb(var(--c-navy)/.04);border-radius:12px;padding:var(--s2) var(--s3);margin:-8px 0}
+.rk-cmp-row.hd .r{background:none;color:rgb(var(--c-navy))}
+.rk-cmp-row span{color:rgb(var(--c-muted))}
+@media(max-width:767px){.rk-cmp-row{grid-template-columns:1fr 1fr 1fr 1fr;gap:var(--s2);padding:var(--s3);font-size:var(--f-xs)}.rk-cmp-row .r{padding:var(--s1) var(--s2)}.rk-cmp-row.hd{font-size:10px}}
+.rk-aw-head{margin-bottom:var(--s5)}.rk-aw{border-radius:var(--r-lg);box-shadow:var(--sh-2)}
+/* ---- footer ---- */
+.rk-footer{background:rgb(var(--c-soft));margin-top:var(--s7);padding:var(--s7) var(--s5) var(--s6)}
+.rk-ft-in{max-width:80rem;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:var(--s6)}
+.rk-ft-brand p{margin:var(--s3) 0 var(--s4);color:rgb(var(--c-muted));font-size:var(--f-sm)}
+.rk-ft-col{display:flex;flex-direction:column;gap:var(--s2);font-size:var(--f-sm);color:rgb(var(--c-muted))}
+.rk-ft-col h4{font-size:var(--f-xs);letter-spacing:.08em;text-transform:uppercase;color:rgb(var(--c-navy));font-weight:700;margin-bottom:var(--s1)}
+.rk-ft-col a{color:rgb(var(--c-text));text-decoration:none}.rk-ft-col a:hover{color:rgb(var(--c-navy));text-decoration:underline}
+.rk-ft-tour{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px;border-radius:99px;border:1.5px solid rgb(var(--c-navy)/.2);background:#fff;color:rgb(var(--c-navy));font-weight:600;font-size:var(--f-sm);cursor:pointer}
+.rk-ft-tour:hover{border-color:rgb(var(--c-navy))}
+.rk-ft-legal{max-width:80rem;margin:var(--s6) auto 0;padding-top:var(--s4);border-top:1px solid rgb(var(--c-navy)/.08);display:flex;gap:var(--s4);flex-wrap:wrap;font-size:var(--f-xs);color:rgb(var(--c-muted))}
+@media(max-width:767px){.rk-ft-in{grid-template-columns:1fr 1fr;gap:var(--s5)}.rk-ft-brand{grid-column:1/-1}.rk-footer{padding:var(--s6) var(--s4) var(--s5)}}
+/* ---- city picker note ---- */
+.rk-cd-note{display:flex;align-items:center;justify-content:center;gap:8px;margin:var(--s4) 0 0;font-size:var(--f-sm);color:rgb(var(--c-muted))}
+.rk-cd-note .material-symbols-outlined{font-size:20px;width:20px;overflow:hidden;color:rgb(var(--c-navy))}
+/* ---- back bar (mobile) ---- */
+.rk-backbar{display:none}
+.rk-oc.compact{grid-template-columns:minmax(0,1fr)!important;gap:var(--s3)!important;padding:var(--s4)!important}
+.rk-oc.compact .rk-oc-id{flex-direction:row!important;align-items:center!important}.rk-oc.compact .rk-oc-id .rk-st{margin-left:auto!important;margin-top:0!important}
+.rk-oc.compact .rk-oc-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.rk-dash{gap:var(--s5)}.rk-dsec>h2,.rk-dsec-h{font-size:var(--f-lg);font-weight:700;color:rgb(var(--c-navy));margin-bottom:var(--s4)}
+.rk-dsec{padding:var(--s5)}.rk-od-more{width:100%;margin-top:var(--s3)}
+.rk-od-empty.sm{padding:var(--s5);box-shadow:none;background:rgb(var(--c-soft))}
+@media(max-width:767px){
+  main[data-view]{padding-top:calc(var(--rk-hdr,112px) + var(--s2))!important;padding-bottom:var(--s6)}
+  [data-view=home] section{margin-bottom:var(--s7)!important}
+  .rk-hero2{margin-bottom:var(--s7)!important}
+  .rk-hr-h1{font-size:30px}.rk-hr-p{font-size:15px}
+  .rk-hdr-in{flex-wrap:wrap;padding:10px 14px 12px;gap:10px 8px}
+  .rk-loc{margin-left:auto;height:44px}
+  .rk-search-wrap{order:5;flex:1 1 100%;max-width:none;margin:0}
+  .rk-search-wrap input{height:44px;font-size:15px}.rk-search-wrap .material-symbols-outlined{top:10px}
+  .rk-backbar{display:flex;align-items:center;justify-content:space-between;position:sticky;top:var(--rk-hdr,112px);z-index:40;height:52px;margin:0 0 var(--s2);padding:0 var(--s1);background:rgb(255 255 255/.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 rgb(0 24 49/.06)}
+  .rk-backbar button{width:44px;height:44px;border-radius:50%;border:0;background:none;display:grid;place-items:center;color:rgb(var(--c-navy));cursor:pointer}
+  .rk-backbar button:active{background:rgb(var(--c-soft))}
+  .rk-backbar b{font-size:var(--f-md);font-weight:700;color:rgb(var(--c-navy))}
+  body[data-rk-view=cart],body[data-rk-view=kyc],body[data-rk-view=confirm]{padding-bottom:calc(66px + env(safe-area-inset-bottom))!important}
+  body[data-rk-view=cart] #rk-bnav,body[data-rk-view=kyc] #rk-bnav,body[data-rk-view=confirm] #rk-bnav{display:flex!important}
+  .rk-sh{margin-bottom:var(--s4)}.rk-sh h2{font-size:24px}
+  .rk-offer{width:216px;padding:var(--s4)}.rk-ben,.rk-step-card{width:196px;padding:var(--s4)}
+  .rk-dsec{padding:var(--s4)}
+}
+/* ---- guided tour ---- */
+.rk-tour{position:fixed;inset:0;z-index:95}
+.rk-tour-spot{position:fixed;border-radius:18px;box-shadow:0 0 0 9999px rgb(0 18 40/.6);pointer-events:none;transition:left .25s,top .25s,width .25s,height .25s}
+.rk-tour-card{position:fixed;z-index:96;background:#fff;border-radius:var(--r-lg);padding:var(--s4) var(--s5) var(--s4);box-shadow:var(--sh-3)}
+.rk-tr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s3)}
+.rk-tr-prog{display:flex;gap:5px}.rk-tr-prog i{width:18px;height:4px;border-radius:4px;background:rgb(var(--c-navy)/.12)}.rk-tr-prog i.done{background:rgb(var(--c-navy)/.4)}.rk-tr-prog i.on{background:rgb(var(--c-navy));width:26px}
+.rk-tr-n{font-size:var(--f-xs);color:rgb(var(--c-muted));font-weight:600}
+.rk-tr-t{font-size:var(--f-lg);font-weight:700;line-height:1.25;color:rgb(var(--c-navy));margin:0 0 var(--s4)}
+.rk-tr-btns{display:flex;justify-content:space-between;align-items:center;gap:var(--s3)}.rk-tr-btns>span{display:flex;gap:var(--s2)}
+.rk-tr-btns .rk-btn{min-height:42px;padding:0 18px}
+@media(prefers-reduced-motion:reduce){.rk-tour-spot{transition:none}}
+/* ---- sign-in ---- */
+.rk-au{max-width:420px}
+.rk-au-ph{display:flex;align-items:center;gap:8px;border:1.5px solid rgb(var(--rk-line));border-radius:12px;height:50px;padding-left:14px;background:#fff}
+.rk-au-ph span{font-weight:600;color:rgb(var(--c-navy))}
+.rk-au-ph input{flex:1;min-width:0;border:0;outline:none;height:100%;font-size:16px;background:none;padding:0 14px 0 0}
+.rk-au-ph:focus-within{border-color:rgb(var(--c-navy));box-shadow:0 0 0 3px rgb(var(--c-navy)/.1)}
+.rk-au .rk-fld input.rk-au-otp{text-align:center;letter-spacing:.5em;font-size:20px;font-weight:700;padding-left:.5em}
+.rk-au-links{text-align:center;margin:var(--s3) 0 var(--s1)}.rk-au .rk-hint{margin:0 0 var(--s3)}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+
+/* original footer, lightened with the tokens */
+footer{background:rgb(var(--c-soft))!important;margin-top:var(--s7)}
+footer .rk-ft-tour{margin-bottom:var(--s4)}
+/* dashboard settings shortcuts */
+.rk-sc{display:flex;flex-direction:column}
+.rk-sc button{display:flex;align-items:center;gap:var(--s3);width:100%;min-height:52px;padding:0 var(--s1);background:none;border:0;border-top:1px solid rgb(var(--c-navy)/.07);font:inherit;font-weight:600;font-size:var(--f-md);color:rgb(var(--c-navy));text-align:left;cursor:pointer}
+.rk-sc button:first-child{border-top:0}
+.rk-sc button>.material-symbols-outlined{font-size:22px;width:22px;overflow:hidden}
+.rk-sc button>.material-symbols-outlined:last-child{margin-left:auto;color:rgb(var(--c-muted))}
+.rk-sc button:hover{background:rgb(var(--c-soft));border-radius:12px}
+
+@media(max-width:767px){.rk-top-head h2 span{color:inherit}.rk-top-head i{display:none}}
+/* ===== account dropdown ===== */
+.rk-acct{position:relative;flex-shrink:0}
+.rk-acct-btn{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 10px 0 6px;border-radius:14px;background:#fff;border:1px solid rgb(var(--c-navy)/.12);color:rgb(var(--c-navy));cursor:pointer;font:inherit}
+.rk-acct-btn:hover{border-color:rgb(var(--c-navy)/.3)}
+.rk-acct-av{width:32px;height:32px;border-radius:50%;background:rgb(var(--c-navy));color:#fff;display:grid;place-items:center;flex-shrink:0}
+.rk-acct-av .material-symbols-outlined{font-size:18px;width:18px;overflow:hidden}
+.rk-acct-lb{font-weight:700;font-size:14px;white-space:nowrap}
+.rk-acct-chev{font-size:20px;width:20px;overflow:hidden;color:rgb(var(--c-muted));transition:transform .2s}
+.rk-acct-btn[aria-expanded=true] .rk-acct-chev{transform:rotate(180deg)}
+.rk-acct-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:236px;background:#fff;border-radius:18px;box-shadow:var(--sh-3);padding:8px;z-index:70;border:1px solid rgb(var(--c-navy)/.06)}
+.rk-acct-menu[hidden]{display:none}
+.rk-acct-who{padding:10px 12px 12px;border-bottom:1px solid rgb(var(--c-navy)/.07);margin-bottom:6px}
+.rk-acct-who b{display:block;font-size:15px;color:rgb(var(--c-navy))}.rk-acct-who small{font-size:13px;color:rgb(var(--c-muted))}
+.rk-acct-menu button[role=menuitem]{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:0 12px;border:0;background:none;border-radius:12px;font:inherit;font-weight:600;font-size:14.5px;color:rgb(var(--c-navy));cursor:pointer;text-align:left}
+.rk-acct-menu button[role=menuitem] .material-symbols-outlined{font-size:20px;width:20px;overflow:hidden;color:rgb(var(--c-muted))}
+.rk-acct-menu button[role=menuitem]:hover,.rk-acct-menu button[role=menuitem]:focus{background:rgb(var(--c-soft));outline:none}
+.rk-acct-menu button[data-acct=logout]{margin-top:6px;border-top:1px solid rgb(var(--c-navy)/.07);border-radius:0 0 12px 12px;color:rgb(var(--c-muted))}
+@media(max-width:480px){.rk-acct-lb{display:none}.rk-acct-btn{padding:0 8px 0 5px;gap:2px;min-width:44px}.rk-acct-menu{min-width:220px}}
+/* ===== statuses, rent-due alert, order actions ===== */
+.st-active{background:rgb(var(--c-navy)/.08);color:rgb(var(--c-navy))}
+.st-completed{background:#eceae7;color:#555}
+.st-due{background:rgb(var(--c-red)/.12);color:rgb(var(--c-red))}
+.rk-od-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s4);flex-wrap:wrap}
+.rk-oc-due{display:block;margin-top:4px;font-size:12.5px;font-weight:600;color:rgb(var(--c-red))}
+.rk-oc-act.has-pay .pay{grid-column:1/-1}
+.rk-oc-act .rk-btn.red{white-space:nowrap}
+.rk-alert{display:flex;align-items:center;gap:var(--s3);background:rgb(var(--c-red)/.07);border-radius:var(--r-lg);padding:var(--s4) var(--s5)}
+.rk-alert>.material-symbols-outlined{font-size:28px;width:28px;overflow:hidden;color:rgb(var(--c-red));flex-shrink:0}
+.rk-alert div{flex:1;min-width:0}.rk-alert b{display:block;color:rgb(var(--c-navy));font-size:var(--f-md)}.rk-alert small{font-size:var(--f-sm);color:rgb(var(--c-muted))}
+.rk-alert .rk-btn{flex-shrink:0}
+@media(max-width:600px){.rk-alert{flex-wrap:wrap;padding:var(--s4)}.rk-alert .rk-btn{width:100%}}
+@media(min-width:900px){.rk-qa-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rk-qa{flex-direction:row;align-items:center;gap:10px}}
+/* ===== rent payment page ===== */
+.rk-pay-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:var(--s5);align-items:start;margin-bottom:var(--s5)}
+.rk-pay-main{display:grid;gap:var(--s5);min-width:0}
+.rk-pay-sum{position:sticky;top:calc(var(--rk-hdr,76px) + 16px)}
+@media(max-width:900px){.rk-pay-grid{grid-template-columns:minmax(0,1fr)}.rk-pay-sum{position:static}}
+.rk-due-list{display:flex;flex-direction:column}
+.rk-due{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s2);border-radius:var(--r-md);cursor:pointer}
+.rk-due+.rk-due{border-top:1px solid rgb(var(--c-navy)/.06)}.rk-due:hover{background:rgb(var(--c-soft))}
+.rk-due input{width:22px;height:22px;accent-color:rgb(var(--c-navy));flex-shrink:0}
+.rk-due-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.rk-due-main b{font-size:var(--f-md);color:rgb(var(--c-navy));overflow-wrap:anywhere}.rk-due-main small{font-size:var(--f-sm);color:rgb(var(--c-muted));overflow-wrap:anywhere}
+.rk-due-amt{text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px}.rk-due-amt b{font-size:var(--f-lg);color:rgb(var(--c-navy))}
+.rk-dtag{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px;font-style:normal;white-space:nowrap}
+.rk-dtag.late{background:rgb(var(--c-red)/.12);color:rgb(var(--c-red))}.rk-dtag.soon{background:#fff4e0;color:#8a5a00}.rk-dtag.paid{background:#e3f4ea;color:#15803d}
+.rk-pm-tabs{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s4)}
+.rk-pm-tabs button{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 16px;border-radius:99px;border:0;background:rgb(var(--c-soft));font:inherit;font-weight:600;font-size:14px;color:rgb(var(--c-navy));cursor:pointer}
+.rk-pm-tabs button.on{background:rgb(var(--c-navy));color:#fff}
+.rk-pm-tabs .material-symbols-outlined{font-size:20px;width:20px;overflow:hidden}
+.rk-apps{display:flex;flex-wrap:wrap;gap:var(--s2)}.rk-apps .rk-chip{min-height:44px;padding:0 16px}
+.rk-pay-sum .rk-od-sum{margin-bottom:var(--s3)}.rk-od-sum .late dd{color:rgb(var(--c-red))}
+.rk-od-sum dd{text-align:right;overflow-wrap:anywhere}
+.rk-pay-ok{background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh-2);padding:var(--s7) var(--s5);text-align:center;max-width:36rem;margin:0 auto var(--s6)}
+.rk-pay-ok .ok-ic{width:72px;height:72px;border-radius:50%;background:#e3f4ea;color:#15803d;display:inline-grid;place-items:center;margin-bottom:var(--s3)}
+.rk-pay-ok .ok-ic .material-symbols-outlined{font-size:40px;width:40px;overflow:hidden}
+.rk-pay-ok h1{font-size:var(--f-xl);font-weight:700;color:rgb(var(--c-navy));margin:0}.rk-pay-ok .amt{font-size:var(--f-2xl);font-weight:700;color:rgb(var(--c-navy));margin:var(--s2) 0 var(--s5)}
+.rk-pay-ok .rk-od-sum{text-align:left}
+.rk-hist-list{list-style:none;margin:0;padding:0}
+.rk-hist-list li{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--s3);padding:var(--s3) 0;align-items:center}
+.rk-hist-list li+li{border-top:1px solid rgb(var(--c-navy)/.06)}
+.rk-hist-list b{display:block;font-size:var(--f-sm);color:rgb(var(--c-navy))}.rk-hist-list small{display:block;font-size:var(--f-xs);color:rgb(var(--c-muted));overflow-wrap:anywhere}
+.rk-hist-list .b{text-align:right}.rk-hist-list .c{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+@media(max-width:600px){.rk-hist-list li{grid-template-columns:1fr auto}.rk-hist-list .c{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center;text-align:left}}
+@media(max-width:500px){.rk-due{align-items:flex-start}.rk-due-amt b{font-size:var(--f-md)}}
+
 </style>
 </head>
 <body class="bg-surface font-body-md text-on-surface antialiased">
-<header class="fixed top-0 left-0 right-0 z-50 bg-surface-white/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="rk-m-notice" role="button" tabindex="0" aria-label="Change city" onclick="openLocationModal()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLocationModal()}"><span class="l"><i></i><span><b data-loc="city">Gurgaon</b> • <span data-loc="tag">Millennium City Hub</span></span><em>48h delivery</em></span><a href="tel:18002701950" onclick="event.stopPropagation()"><span class="material-symbols-outlined" style="font-size:14px;width:14px;overflow:hidden">call</span>Support</a></div><div class="h-20 border-b border-border-subtle"><div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between gap-6"><div class="flex items-center gap-3 shrink-0"><a class="rk-logo" data-path="home" href="#" aria-label="Rentickle home"><img class="rk-logo-d" src="brand/rentickle-logo.svg" alt="Rentickle" width="93" height="32"><img class="rk-logo-m" src="brand/rentickle-mobile-logo.svg" alt="" width="28" height="33"></a><span class="rk-hub" id="rk-brand-city">Gurgaon Hub</span></div>
-<div class="rk-search-wrap" role="search"><span class="material-symbols-outlined">search</span><input type="text" placeholder="Search beds, sofas, fridges, washing machines…" aria-label="Search products" autocomplete="off"/></div>
-<div class="flex items-center gap-4 shrink-0"><nav class="hidden lg:flex items-center gap-5" data-active-classes="text-primary font-bold"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="offers" href="#">Offers</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="help-faqs" href="#">Help &amp; FAQs</a></nav><div class="flex items-center gap-3 pl-4 border-l border-border-subtle"><a class="rk-m-offers" data-path="offers" href="#"><span class="material-symbols-outlined">sell</span>Offers</a><a aria-label="Cart" class="relative p-2 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined text-[24px]">shopping_bag</span><span class="absolute top-1 right-1 w-4 h-4 rounded-full bg-accent-red text-on-error font-label-sm text-[10px] flex items-center justify-center font-bold" id="rk-cart-count">0</span></a><div class="relative" id="rk-acct-wrap"><button aria-controls="rk-acct-menu" aria-expanded="false" aria-haspopup="menu" class="flex items-center gap-2 p-1 pl-2 pr-3 rounded-lg border border-border-subtle hover:bg-surface-container-low transition-colors" id="rk-acct-btn" type="button"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="font-label-md text-label-md text-on-surface hidden md:inline">Account</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant hidden md:inline">expand_more</span></button><div class="rk-menu" hidden id="rk-acct-menu" role="menu"><a data-path="account" href="#" role="menuitem">My account</a><a data-path="orders" href="#" role="menuitem">My orders</a><button data-k="edit-details" role="menuitem" type="button">Edit details</button><a data-path="settings" href="#" role="menuitem">Settings</a></div></div></div></div></div></div>
-<div class="h-12 bg-surface-white border-b border-border-subtle"><div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between"><nav class="flex items-center gap-7 overflow-x-auto h-full scrollbar-none" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-path="cat/beds" href="#">Beds &amp; Mattresses</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-path="cat/sofas" href="#">Sofas</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-path="cat/dining-tables" href="#">Dining Tables</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-path="cat/refrigerators" href="#">Refrigerators</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-path="cat/washing-machines" href="#">Washing Machines</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-path="cat/study-tables" href="#">Study Tables</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-path="cat/wardrobes" href="#">Wardrobes</a></nav><div class="flex items-center gap-3 shrink-0"><a class="hidden xl:flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors py-1 pr-3" href="tel:18002701950"><span class="material-symbols-outlined text-[18px]">call</span><span class="font-label-md text-label-md">1800-270-1950</span></a><div class="hidden lg:flex items-center shrink-0"><button aria-label="Change delivery city" class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors text-left" onclick="openLocationModal()" type="button"><span class="material-symbols-outlined text-[18px] text-primary">location_on</span><div class="flex flex-col"><div class="flex items-center gap-1.5"><span class="font-label-md text-label-md text-on-surface" id="rk-city-label">122002 · Cyber City</span><span class="material-symbols-outlined text-[14px] text-on-surface-variant">expand_more</span></div><span class="font-label-sm text-label-sm text-trust-emerald font-bold" id="rk-city-sla">48h Delivery Certified</span></div></button></div></div></div></div></header>
+<header class="rk-hdr"><div class="rk-hdr-in"><a class="rk-logo" data-path="home" href="#" aria-label="Rentickle home"><img class="rk-logo-d" src="brand/rentickle-logo.svg" alt="Rentickle" width="93" height="32"><img class="rk-logo-m" src="brand/rentickle-mobile-logo.svg" alt="" width="28" height="33"></a><button class="rk-loc" id="rk-city-btn" type="button" onclick="openLocationModal()" aria-label="Change city"><span class="material-symbols-outlined">location_on</span><span id="rk-city-label">Gurgaon</span><span class="material-symbols-outlined">expand_more</span></button><div class="rk-search-wrap" role="search"><span class="material-symbols-outlined">search</span><input type="text" placeholder="Search beds, sofas, fridges…" aria-label="Search products" autocomplete="off"></div><a class="rk-ic" aria-label="Cart" data-path="cart" href="#"><span class="material-symbols-outlined">shopping_bag</span><span id="rk-cart-count" class="rk-cnt">0</span></a><div class="rk-acct" id="rk-acct-wrap"><button type="button" class="rk-acct-btn" id="rk-acct-btn" aria-haspopup="menu" aria-expanded="false" aria-controls="rk-acct-menu" aria-label="Account menu"><span class="rk-acct-av"><span class="material-symbols-outlined">person</span></span><span class="rk-acct-lb">Account</span><span class="material-symbols-outlined rk-acct-chev">expand_more</span></button><div class="rk-acct-menu" id="rk-acct-menu" role="menu" hidden><div class="rk-acct-who"><b id="rk-who-n">Naman</b><small id="rk-who-p">+91 91302 08733</small></div><button type="button" role="menuitem" data-acct="dashboard"><span class="material-symbols-outlined">dashboard</span>Dashboard</button><button type="button" role="menuitem" data-acct="orders"><span class="material-symbols-outlined">receipt_long</span>Orders</button><button type="button" role="menuitem" data-acct="pay"><span class="material-symbols-outlined">payments</span>Pay Rent</button><button type="button" role="menuitem" data-acct="settings"><span class="material-symbols-outlined">settings</span>Settings</button><button type="button" role="menuitem" data-acct="logout"><span class="material-symbols-outlined">logout</span>Logout</button></div></div></div></header>
 <main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="home">
 <div class="max-w-7xl mx-auto px-6 py-6">
 <div class="flex flex-col w-full">
@@ -1220,7 +1421,7 @@ body.rk-as-open #rk-assistant-btn{display:none!important}
 </main>
 <main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="category"><div class="rk-wrap" id="rk-cat-root"></div></main>
 <main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="product"><div class="rk-wrap" id="rk-prod-root"></div></main>
-<main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="planner"><div class="rk-wrap" id="rk-combo-root"></div></main><main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="settings"><div class="rk-wrap" id="rk-settings-root"></div></main><main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="orders"><div class="rk-wrap" id="rk-orders-root"></div></main><main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="track"><div class="rk-wrap" id="rk-track-root"></div></main>
+<main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="planner"><div class="rk-wrap" id="rk-combo-root"></div></main><main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="settings"><div class="rk-wrap" id="rk-settings-root"></div></main><main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="orders"><div class="rk-wrap" id="rk-orders-root"></div></main><main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="track"><div class="rk-wrap" id="rk-track-root"></div></main><main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="pay"><div class="rk-wrap" id="rk-pay-root"></div></main>
 <main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="cart"><div class="max-w-7xl mx-auto px-6 py-8"><div class="flex flex-col w-full">
 <!-- Progress & Logistics Status Strip -->
 <div class="flex flex-col gap-4 mb-8">
@@ -1578,7 +1779,7 @@ body.rk-as-open #rk-assistant-btn{display:none!important}
 <div class="mt-4 p-3.5 rounded-lg bg-trust-emerald/10 flex items-center justify-between text-trust-emerald" id="kyc-success-banner">
 <div class="flex items-center gap-2.5">
 <span class="material-symbols-outlined text-[20px]">task_alt</span>
-<span class="font-body-sm text-body-sm font-medium">Auto-verified for: <strong class="text-on-surface">Arnav Malhotra (<span data-loc="hub">Gurgaon Hub</span> ID #DEL-9921)</strong></span>
+<span class="font-body-sm text-body-sm font-medium">Auto-verified for: <strong class="text-on-surface">Naman (<span data-loc="hub">Gurgaon Hub</span> ID #DEL-9921)</strong></span>
 </div>
 <span class="font-label-sm text-label-sm uppercase font-bold tracking-wider">Aadhaar Linked</span>
 </div>
@@ -1607,7 +1808,7 @@ body.rk-as-open #rk-assistant-btn{display:none!important}
                     Instant Corporate Email OTP
                   </span>
 <div class="relative">
-<input class="w-full h-11 px-3.5 rounded-lg bg-surface-white font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-xs" placeholder="name@company.com" type="email" value="arnav.m@deloitte.com"/>
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-white font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-xs" placeholder="name@company.com" type="email" value="snaman2310@gmail.com"/>
 </div>
 <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Deloitte, Google, Genpact, Zomato corporate partners qualify instantly.</p>
 </div>
@@ -2308,7 +2509,7 @@ body.rk-as-open #rk-assistant-btn{display:none!important}
 </div>
 </div>
 </div></main>
-<main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="dashboard"><div class="rk-wrap"><div class="rk-dash"><section class="rk-dh" aria-label="Profile"><div class="rk-dh-av" id="acct-initials"><span class="material-symbols-outlined">person</span></div><div class="rk-dh-tx"><h1 id="acct-name">Welcome to Rentickle</h1><div class="rk-dh-meta"><span><span class="material-symbols-outlined">call</span><span id="acct-phone" data-k2="edit" role="button" tabindex="0">Add mobile number</span></span><span><span class="material-symbols-outlined">mail</span><span id="acct-email">Add your email</span></span></div></div><button class="rk-btn sec" type="button" data-k="edit-details"><span class="material-symbols-outlined" style="font-size:18px">edit</span>Edit</button></section><div class="rk-qa-grid"><button type="button" class="rk-qa" data-qa="orders"><span class="rk-qa-i"><span class="material-symbols-outlined">receipt_long</span></span><span><b>Orders</b><small>Track and manage</small></span></button><button type="button" class="rk-qa" data-k="edit-details"><span class="rk-qa-i"><span class="material-symbols-outlined">person</span></span><span><b>Edit details</b><small>Name, phone, email</small></span></button><button type="button" class="rk-qa" data-qa="settings"><span class="rk-qa-i"><span class="material-symbols-outlined">settings</span></span><span><b>Settings</b><small>Alerts and security</small></span></button><button type="button" class="rk-qa" data-qa="addresses"><span class="rk-qa-i"><span class="material-symbols-outlined">location_on</span></span><span><b>Addresses</b><small>Saved delivery spots</small></span></button><button type="button" class="rk-qa" data-qa="support"><span class="rk-qa-i"><span class="material-symbols-outlined">support_agent</span></span><span><b>Support</b><small>Chat with us</small></span></button></div><section class="rk-dsec" aria-label="Active order"><h2>Active order</h2><div id="acct-order"></div></section><div id="saved-addresses"></div></div></div></main>
+<main class="w-full pt-32 bg-canvas-warm min-h-screen hidden" data-view="dashboard"><div class="rk-wrap"><div class="rk-dash"><section class="rk-dh" aria-label="Profile"><div class="rk-dh-av" id="acct-initials"><span class="material-symbols-outlined">person</span></div><div class="rk-dh-tx"><h1 id="acct-name">Welcome to Rentickle</h1><div class="rk-dh-meta"><span><span class="material-symbols-outlined">call</span><span id="acct-phone" data-k2="edit" role="button" tabindex="0">Add mobile number</span></span><span><span class="material-symbols-outlined">mail</span><span id="acct-email">Add your email</span></span></div></div><button class="rk-btn sec" type="button" data-k="edit-details"><span class="material-symbols-outlined" style="font-size:18px">edit</span>Edit</button></section><div id="rk-dash-alert"></div><div class="rk-qa-grid"><button type="button" class="rk-qa" data-qa="orders"><span class="rk-qa-i"><span class="material-symbols-outlined">receipt_long</span></span><span><b>Orders</b><small>Track and manage</small></span></button><button type="button" class="rk-qa" data-qa="pay"><span class="rk-qa-i"><span class="material-symbols-outlined">payments</span></span><span><b>Pay Rent</b><small>Dues and history</small></span></button><button type="button" class="rk-qa" data-k="edit-details"><span class="rk-qa-i"><span class="material-symbols-outlined">person</span></span><span><b>Edit details</b><small>Name, phone, email</small></span></button><button type="button" class="rk-qa" data-qa="settings"><span class="rk-qa-i"><span class="material-symbols-outlined">settings</span></span><span><b>Settings</b><small>Alerts and preferences</small></span></button><button type="button" class="rk-qa" data-qa="addresses"><span class="rk-qa-i"><span class="material-symbols-outlined">location_on</span></span><span><b>Addresses</b><small>Saved spots</small></span></button><button type="button" class="rk-qa" data-qa="support"><span class="rk-qa-i"><span class="material-symbols-outlined">support_agent</span></span><span><b>Support</b><small>Chat with us</small></span></button></div><section class="rk-dsec" aria-label="Active order"><h2 class="rk-dsec-h">Active order</h2><div id="acct-order"></div></section><section class="rk-dsec" aria-label="Orders"><h2 class="rk-dsec-h">Orders</h2><div id="rk-dash-orders"></div></section><div id="saved-addresses"></div><section class="rk-dsec" aria-label="Settings"><h2 class="rk-dsec-h">Settings</h2><div class="rk-sc"><button type="button" data-qa="settings"><span class="material-symbols-outlined">notifications</span>Notifications<span class="material-symbols-outlined">chevron_right</span></button><button type="button" data-k="edit-details"><span class="material-symbols-outlined">person</span>Edit details<span class="material-symbols-outlined">chevron_right</span></button><button type="button" data-qa="signout"><span class="material-symbols-outlined">logout</span>Logout<span class="material-symbols-outlined">chevron_right</span></button></div></section></div></div></main>
 <footer class="w-full bg-surface-white border-t border-border-subtle pt-14 pb-8">
 <div class="max-w-7xl mx-auto px-6">
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-border-subtle">
@@ -2316,7 +2517,7 @@ body.rk-as-open #rk-assistant-btn{display:none!important}
 <div class="mb-4"><a class="rk-logo" data-path="home" href="#" aria-label="Rentickle home"><img class="rk-logo-d" src="brand/rentickle-logo.svg" alt="Rentickle" width="93" height="32" style="display:block"></a></div>
 <p class="font-body-md text-body-md text-on-surface-variant mb-5 max-w-md">
           <span data-loc="possessive">Gurgaon's</span> premier furniture and appliance subscription partner. Designed for corporate mobility, certified 48-hour move-in setup, and flexible tenure ownership with zero lock-in stress.
-        </p>
+        </p><button type="button" class="rk-ft-tour" data-tour><span class="material-symbols-outlined" style="font-size:18px;width:18px;overflow:hidden">tour</span>Take the tour</button>
 <div class="space-y-2 text-on-surface-variant font-body-sm text-body-sm">
 <div class="flex items-start gap-2">
 <span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">business</span>
@@ -3670,11 +3871,11 @@ window.RK_PLAN_IMG = "https://lh3.googleusercontent.com/aida-public/AB6AXuAg3zI7
   }
 
   /* ---------- router ---------- */
-  const VIEWS = ['home', 'category', 'product', 'planner', 'cart', 'kyc', 'confirm', 'dashboard', 'settings', 'orders', 'track'];
+  const VIEWS = ['home', 'category', 'product', 'planner', 'cart', 'kyc', 'confirm', 'dashboard', 'settings', 'orders', 'track', 'pay'];
   const TITLES = {
     home: 'Rentickle · Rent the perfect lifestyle', category: 'Sofas & Couches · Rentickle', product: 'Sofa Superia 3-Seater · Rentickle',
     planner: 'Move-in Planner · Rentickle', cart: 'Cart · Rentickle', kyc: 'KYC & Delivery Slot · Rentickle',
-    confirm: 'Order Confirmed · Rentickle', dashboard: 'My Subscriptions · Rentickle', settings: 'Settings · Rentickle', orders: 'Your Orders · Rentickle', track: 'Live Move-in Tracker · Rentickle',
+    confirm: 'Order Confirmed · Rentickle', dashboard: 'My Subscriptions · Rentickle', settings: 'Settings · Rentickle', orders: 'Your Orders · Rentickle', track: 'Live Move-in Tracker · Rentickle', pay: 'Pay Rent · Rentickle',
   };
   const PATHS = {
     home: ['home', 'rentickle-home'],
@@ -3685,6 +3886,7 @@ window.RK_PLAN_IMG = "https://lh3.googleusercontent.com/aida-public/AB6AXuAg3zI7
     settings: ['settings'],
     orders: ['orders'],
     track: ['track'],
+    pay: ['pay'],
     confirm: ['track-order'],
     offers: ['offers', 'exclusive-offers'],
     help: ['help-faqs', 'help-and-faqs'],
@@ -3697,6 +3899,8 @@ window.RK_PLAN_IMG = "https://lh3.googleusercontent.com/aida-public/AB6AXuAg3zI7
     return null;
   }
 
+  const hashOf = (v) => (v === 'dashboard' ? 'account' : (v === 'pay' && window.__rkPay ? 'pay/' + encodeURIComponent(window.__rkPay) : v));
+  const viewOf = (h) => { const p = h.split('/'); if (p[0] === 'pay') { window.__rkPay = p[1] ? decodeURIComponent(p[1]) : ''; return 'pay'; } return p[0] === 'account' ? 'dashboard' : p[0]; };
   function show(view, opts) {
     opts = opts || {};
     if (VIEWS.indexOf(view) < 0) view = 'home';
@@ -3705,7 +3909,7 @@ window.RK_PLAN_IMG = "https://lh3.googleusercontent.com/aida-public/AB6AXuAg3zI7
     const changed = current !== view;
     current = view;
     document.title = TITLES[view] || 'Rentickle';
-    if (location.hash !== '#' + view) { try { history.replaceState(null, '', '#' + view); } catch (e) { location.hash = view; } }
+    if (location.hash !== '#' + hashOf(view)) { try { if (changed && !opts.noPush && window.__rkReady) { window.__rkDepth = (window.__rkDepth || 0) + 1; history.pushState({ rk: 1, d: window.__rkDepth }, '', '#' + hashOf(view)); } else history.replaceState(history.state || { rk: 1, d: window.__rkDepth || 0 }, '', '#' + hashOf(view)); } catch (e) { location.hash = hashOf(view); } }
     renderAll();
     highlightNav(view);
     if (opts.scrollTo) {
@@ -3729,6 +3933,7 @@ window.RK_PLAN_IMG = "https://lh3.googleusercontent.com/aida-public/AB6AXuAg3zI7
     if (t === 'settings') return show('settings');
     if (t === 'orders') return show('orders');
     if (t === 'track') return show('track');
+    if (t === 'pay') return show('pay');
     if (t === 'confirm') return show('confirm');
     if (t === 'offers') return show('home', { scrollTo: '#offers-container' });
     if (t === 'help') return show('product', { scrollTo: '#faq-anchor' });
@@ -4097,8 +4302,8 @@ window.RK_PLAN_IMG = "https://lh3.googleusercontent.com/aida-public/AB6AXuAg3zI7
   /* ---------- init ---------- */
   document.addEventListener('DOMContentLoaded', () => {});
   window.addEventListener('hashchange', () => {
-    const v = location.hash.replace('#', '');
-    if (VIEWS.indexOf(v) >= 0 && v !== current) show(v);
+    const v = viewOf(location.hash.replace('#', ''));
+    if (VIEWS.indexOf(v) >= 0 && v !== current) show(v, { noPush: true });
   });
   // make Gurgaon the pre-selected card in the city modal (it opened on Bangalore in the mock-up)
   (function initCity() {
@@ -4106,8 +4311,10 @@ window.RK_PLAN_IMG = "https://lh3.googleusercontent.com/aida-public/AB6AXuAg3zI7
     const target = cards.find((c) => (c.getAttribute('onclick') || '').indexOf("'" + state.city.city + "'") >= 0);
     applyCity();
   })();
-  const startView = VIEWS.indexOf(location.hash.replace('#', '')) >= 0 ? location.hash.replace('#', '') : 'home';
+  const startView = VIEWS.indexOf(viewOf(location.hash.replace('#', ''))) >= 0 ? viewOf(location.hash.replace('#', '')) : 'home';
   show(startView, { force: false });
+  try { history.replaceState({ rk: 1, d: 0 }, '', '#' + hashOf(startView)); } catch (e) {}
+  window.__rkDepth = 0; window.__rkReady = true;
   window.RK = { state, addItem, totals, show, cur: () => current, coupons: COUPONS, persist };
 })();
 
@@ -4857,7 +5064,7 @@ window.RK_CONFIG = { showSampleReviews: false, imageOverrides: {}, api: { baseUr
   var toast = function (m) { if (window.rkToast) window.rkToast(m); };
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var LS = { get: function (k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }, set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
-  var store = { profile: LS.get('rk-profile', null), addrs: LS.get('rk-addrs', []), notify: LS.get('rk-notify', { email: true, sms: true, whatsapp: false }) };
+  var store = { profile: LS.get('rk-profile', null) || { name: 'Naman', phone: '9130208733', email: 'snaman2310@gmail.com' }, addrs: LS.get('rk-addrs', []), notify: LS.get('rk-notify', { email: true, sms: true, whatsapp: false }) };
   var LOCAL = !API;
   var delay = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
   function api(method, path, body) {
@@ -4998,8 +5205,7 @@ window.RK_CONFIG = { showSampleReviews: false, imageOverrides: {}, api: { baseUr
       '<section class="rk-panel"><h2>Profile</h2><div class="rk-set-row"><div><b>' + esc(p ? p.name : 'Not set yet') + '</b><small>' + (p ? esc(fmtPhone(p.phone) + ' · ' + p.email) : 'Add your name, mobile number and email') + '</small></div><button class="rk-btn sec" data-k2="edit">Edit details</button></div></section>' +
       '<section class="rk-panel"><h2>Notifications</h2>' + tg('email', 'Email', 'Order updates, invoices and offers') + tg('sms', 'SMS', 'Delivery slots and payment reminders') + tg('whatsapp', 'WhatsApp', 'Delivery updates and support chat') + (LOCAL ? '<p class="rk-local" style="margin-top:12px"><span class="material-symbols-outlined">info</span>Preferences are stored on this device. Sending messages needs a notifications service.</p>' : '') + '</section>' +
       '<section class="rk-panel"><h2>Saved addresses</h2><div class="rk-set-row"><div><b>' + ad.length + ' saved</b><small>' + (ad.length ? esc((ad.filter(function (x) { return x.isDefault; })[0] || ad[0]).label + ': ' + addrLine(ad.filter(function (x) { return x.isDefault; })[0] || ad[0])) : 'Add an address for faster checkout') + '</small></div><button class="rk-btn sec" data-k2="addr-manage">Manage addresses</button></div></section>' +
-      '<section class="rk-panel"><h2>Security</h2><div class="rk-set-row off"><div><b>Change password</b><small>Needs a sign-in service. This site has no login yet.</small></div><button class="rk-btn sec" disabled>Unavailable</button></div>' +
-      '<div class="rk-set-row off"><div><b>Sign out</b><small>Available once sign-in is connected.</small></div><button class="rk-btn sec" disabled>Unavailable</button></div></section></div>';
+      '<section class="rk-panel"><h2>Account</h2><div class="rk-set-row"><div><b>Logout</b><small>' + 'Resets the demo. You stay signed in as Naman.' + '</small></div><button class="rk-btn sec" data-k2="signout">Logout</button></div></section></div>';
   }
 
   /* ---------- header account menu ---------- */
@@ -5041,6 +5247,7 @@ window.RK_CONFIG = { showSampleReviews: false, imageOverrides: {}, api: { baseUr
     if (k === 'addr-def') { DATA.defAddr(id).then(function () { renderAddrs(); renderSettings(); toast('Default address updated.'); }, function (er) { toast(er.message || 'Could not update.'); }); return; }
     if (k === 'addr-manage') { RK.show('dashboard', { scrollTo: '#saved-addresses' }); return; }
     if (k === 'notify') { var n = Object.assign({}, store.notify); n[el.dataset.v] = !n[el.dataset.v]; DATA.saveNotify(n).then(function () { renderSettings(); toast('Notification preference saved.'); var s = $('#rk-settings-root [data-v="' + el.dataset.v + '"]'); if (s) s.focus(); }, function (er) { toast(er.message || 'Could not save.'); }); return; }
+    if (k === 'signout') { if (window.RKAUTH) RKAUTH.signOut(); return; }
     if (k === 'aw-pp') { aw.user = !aw.user; el.setAttribute('aria-label', aw.user ? 'Play awards slider' : 'Pause awards slider'); el.firstChild.textContent = aw.user ? 'play_arrow' : 'pause'; return; }
   });
   document.addEventListener('click', function (e) { var el = e.target.closest('[data-k2="aw-pp"]'); if (!el) return; });
@@ -5050,6 +5257,10 @@ window.RK_CONFIG = { showSampleReviews: false, imageOverrides: {}, api: { baseUr
     var d = e.detail || {};
     if (!LOCAL) { api('PUT', '/me/city', { city: d.city, pincode: d.pin || null }).catch(function () {}); return; }
     if (store.profile) { store.profile.city = d.city; LS.set('rk-profile', store.profile); }
+  });
+  document.addEventListener('rk:signin', function (ev) {
+    var ph = ev.detail && ev.detail.phone; if (!ph) return; var p = store.profile || { name: '', phone: '', email: '' };
+    if (!p.phone) { p = { name: p.name || '', phone: ph, email: p.email || '' }; store.profile = p; LS.set('rk-profile', p); paintBanner(); renderSettings(); }
   });
   window.RKX = { render: function (view) { if (view === 'dashboard') { paintBanner(); renderAddrs(); } if (view === 'settings') renderSettings(); if (view === 'home') initAwards(); } };
   paintBanner(); renderAddrs(); renderSettings(); initAwards();
@@ -5080,7 +5291,7 @@ window.RK_CONFIG = { showSampleReviews: false, imageOverrides: {}, api: { baseUr
   var stored = LS.get(KEY, null);
   var CUR = stored && stored.city ? { city: canon(stored.city), pin: stored.pin || '' } : { city: 'Gurgaon', pin: '122002' };
   var info = function () { return BY[CUR.city] || BY.Gurgaon; };
-  var label = function () { return CUR.pin && CUR.city === 'Gurgaon' && CUR.pin === '122002' ? '122002 \u00b7 Cyber City' : CUR.city + ' \u00b7 ' + info().tag; };
+  var label = function () { return CUR.city; };
 
   /* ---------- illustrated landmark tiles (swap for photos via RK_CONFIG.cityImages = { Delhi: 'images/cities/delhi.webp', ... }) ---------- */
   var SKY = { Delhi: ['#ffd9a8', '#7aa7d6'], Gurgaon: ['#bfe0f5', '#5f9ed1'], Hyderabad: ['#ffe0b8', '#8bb4de'], Noida: ['#cfe6f7', '#6aa6d8'], Bengaluru: ['#c9e4f4', '#7db4dc'], Pune: ['#f6dcc0', '#86a9cc'], Mumbai: ['#ffcf9f', '#e9946e'] };
@@ -5106,7 +5317,7 @@ window.RK_CONFIG = { showSampleReviews: false, imageOverrides: {}, api: { baseUr
       '<div class="rk-cd-head"><span class="rk-cd-ic" aria-hidden="true"><span class="material-symbols-outlined">my_location</span></span><div><h2 id="rk-cd-title">Choose Your City</h2><p>Select your city to explore rental products and services available near you.</p></div></div>' +
       '<div class="rk-cd-grid" id="cities-grid" role="radiogroup" aria-labelledby="rk-cd-title">' + CITIES.map(function (c) {
         return '<button type="button" class="city-card rk-ct" role="radio" aria-checked="false" data-city="' + c.n + '"><span class="rk-ct-img">' + art(c.n) + '</span><span class="rk-ct-name">' + c.n + '</span></button>';
-      }).join('') + '</div></div>';
+      }).join('') + '</div><p class="rk-cd-note"><span class="material-symbols-outlined">local_shipping</span>48h delivery \u00b7 Free assembly</p></div>';
   }
   function mark() { $$('#cities-grid .rk-ct').forEach(function (b) { var on = b.dataset.city === CUR.city; b.classList.toggle('selected', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); }); }
 
@@ -5338,7 +5549,7 @@ window.RK_ASSISTANT = {
   if ('ResizeObserver' in window && $('header')) new ResizeObserver(measure).observe($('header')); window.addEventListener('resize', measure); measure();
 
   /* bottom navigation (mobile only, via CSS) */
-  var NAV = [['explore', 'Explore', 'home'], ['local_offer', 'Combos', 'planner'], ['tune', 'Planner', 'plan'], ['receipt_long', 'Orders', 'orders'], ['shopping_bag', 'Cart', 'cart'], ['support_agent', 'Help', 'help']];
+  var NAV = [['explore', 'Explore', 'home'], ['local_offer', 'Combos', 'planner'], ['tune', 'Planner', 'plan'], ['person', 'Account', 'account'], ['shopping_bag', 'Cart', 'cart'], ['support_agent', 'Help', 'help']];
   function buildNav() {
     var n = document.createElement('nav'); n.id = 'rk-bnav'; n.setAttribute('aria-label', 'Quick navigation');
     n.innerHTML = NAV.map(function (x) { return '<button type="button" data-bn="' + x[2] + '"><span class="rk-bn-i"><span class="material-symbols-outlined">' + x[0] + '</span>' + (x[2] === 'cart' ? '<b id="rk-bn-badge" hidden>0</b>' : '') + '</span><span class="rk-bn-t">' + x[1] + '</span></button>'; }).join('');
@@ -5347,12 +5558,13 @@ window.RK_ASSISTANT = {
       var b = e.target.closest('[data-bn]'); if (!b) return; var k = b.dataset.bn;
       if (k === 'help') { if (window.RKAssistant) RKAssistant.open(); return; }
       if (k === 'plan') { RK.show('home', { force: true }); setTimeout(function () { var h = document.getElementById('rk-hero'); if (h) h.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, 80); return; }
+      if (k === 'account') { if (window.RKAUTH) RKAUTH.account(); return; }
       RK.show(k, { force: true });
     });
   }
   function syncNav() {
     var v = RK.cur(); document.body.setAttribute('data-rk-view', v);
-    $$('#rk-bnav [data-bn]').forEach(function (b) { var k = b.dataset.bn; b.classList.toggle('on', (k === 'home' && v === 'home') || (k === 'planner' && v === 'planner') || (k === 'cart' && v === 'cart') || (k === 'orders' && (v === 'orders' || v === 'track'))); });
+    $$('#rk-bnav [data-bn]').forEach(function (b) { var k = b.dataset.bn; b.classList.toggle('on', (k === 'home' && v === 'home') || (k === 'planner' && v === 'planner') || (k === 'cart' && v === 'cart') || (k === 'account' && (v === 'dashboard' || v === 'orders' || v === 'track' || v === 'settings' || v === 'pay'))); });
     var c = $('#rk-cart-count'), bb = $('#rk-bn-badge'); if (c && bb) { var n = parseInt(c.textContent, 10) || 0; bb.textContent = n; bb.hidden = !n; }
   }
 
@@ -5380,6 +5592,8 @@ window.RK_ASSISTANT = {
     else if (k === 'addresses') { var sa = $('#saved-addresses'); if (sa) sa.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }
     else if (k === 'support') { if (window.RKAssistant) RKAssistant.open(); }
     else if (k === 'settings') RK.show('settings', { force: true });
+    else if (k === 'signout') { if (window.RKAUTH) RKAUTH.signOut(); }
+    else if (k === 'pay') { window.__rkPay = ''; RK.show('pay', { force: true }); }
   });
 
   buildNav();
@@ -5395,93 +5609,147 @@ window.RK_ASSISTANT = {
 
 </script>
 <script>
-/* ===== Round 5: Orders page, order details, Live Move-in Tracker ===== */
+/* =====================================================================================
+   SHARED MOCK DATA (frontend only). Edit this block to change every orders / payment screen.
+   - orders:  items are matched to catalogue products by name (regex); rent, deposit and totals use the site's own pricing.
+   - ago:     days since the order was placed.      nextDueIn: days until the next rent is due (negative = overdue).
+   - status:  active | delivered | scheduled | completed | due   ("due" = Rent Due)
+   - history: earlier rent payments (amount = that order's monthly rent).
+   - Late fee (sample rule): lateFeePerDay x days overdue, capped at lateFeeMax.
+   ===================================================================================== */
+window.RK_MOCK = {
+  customer: { name: 'Naman', phone: '9130208733', email: 'snaman2310@gmail.com' },
+  lateFeePerDay: 25, lateFeeMax: 250,
+  orders: [
+    { id: 'RNK-GGN-84702', ago: 1, status: 'scheduled', tenure: 9, nextDueIn: 30, items: [['^Dining Table 4 Seater', 1], ['^Bookshelf Alpha', 1]] },
+    { id: 'RNK-GGN-84610', ago: 5, status: 'delivered', tenure: 12, nextDueIn: 25, items: [['^Study Table With Drawers', 1], ['^Executive Chair', 1]] },
+    { id: 'RNK-GGN-84521', ago: 38, status: 'active', tenure: 12, nextDueIn: 22, items: [['^Double Bed Alpha 6x5', 1], ['^Premium Ortho.*6x5', 1], ['^Two Door Wardrobe Small', 1]] },
+    { id: 'RNK-GGN-84388', ago: 64, status: 'due', tenure: 12, nextDueIn: -4, items: [['^Washing Machine \\(Top Load', 1], ['^Refrigerator 190 Litres', 1]] },
+    { id: 'RNK-GGN-84297', ago: 92, status: 'due', tenure: 12, nextDueIn: 2, items: [['^Celine Sofa 3 Seater', 1], ['^Center Table Walnut Alpha', 1], ['^32-inch LED TV', 1]] },
+    { id: 'RNK-GGN-82244', ago: 330, status: 'completed', tenure: 6, nextDueIn: null, items: [['^Single Bed Alpha 6x3', 1], ['^Single Mattress.*6x3', 1]] }
+  ],
+  history: [
+    { orderId: 'RNK-GGN-84388', ago: 34, method: 'UPI', txn: 'TXN4821907365' },
+    { orderId: 'RNK-GGN-84297', ago: 33, method: 'Card', txn: 'TXN4799123480' },
+    { orderId: 'RNK-GGN-84297', ago: 63, method: 'UPI', txn: 'TXN4655120957' },
+    { orderId: 'RNK-GGN-82244', ago: 152, method: 'Netbanking', txn: 'TXN4012238817' },
+    { orderId: 'RNK-GGN-82244', ago: 182, method: 'UPI', txn: 'TXN3988012233' }
+  ]
+};
+
+/* shared state: every page reads from here, so paying rent updates the dashboard and the Orders list */
 (function () {
   'use strict';
-  var RK = window.RK, D = window.RK_DATA, CFG = window.RK_CONFIG || {};
+  var M = window.RK_MOCK, RK = window.RK, D = window.RK_DATA, KEY = 'rk-mock-v1', DAY = 86400000, base = Date.now();
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function load() { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; } }
+  function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
+  function find(pat) { var re = new RegExp(pat, 'i'); return (D.products || []).filter(function (p) { return p.price && re.test(p.name); })[0]; }
+  function line(p, tenure, qty) { return { id: p.id, name: p.name, img: p.images && p.images[0] ? 'images/' + p.images[0] : '', base12: p.price, tenure: tenure, qty: qty || 1 }; }
+  var monthOf = function (t) { var d = new Date(t); return MON[d.getMonth()] + ' ' + d.getFullYear(); };
+  function orders() {
+    var s = load(), out = [];
+    M.orders.forEach(function (o) {
+      var items = o.items.map(function (x) { var p = find(x[0]); return p ? line(p, o.tenure, x[1]) : null; }).filter(Boolean); if (!items.length) return;
+      var t = RK.totals(items, null), st = o.status, nextDue = o.nextDueIn == null ? null : base + o.nextDueIn * DAY, paid = s.paid && s.paid[o.id];
+      if (paid && st === 'due') { st = 'active'; nextDue = paid.ts + 30 * DAY; }
+      var due = st === 'due', over = due ? Math.max(0, Math.ceil((base - nextDue) / DAY)) : 0;
+      out.push({ id: o.id, ts: base - o.ago * DAY, status: st, items: items, tenure: o.tenure, rent: t.rent, dep: t.dep, total: t.total, nextDue: nextDue,
+        overdueDays: over, lateFee: due ? Math.min(M.lateFeeMax, over * M.lateFeePerDay) : 0, tag: due ? (nextDue < base ? 'overdue' : 'soon') : null });
+    });
+    return out.sort(function (a, b) { return b.ts - a.ts; });
+  }
+  function due() {
+    return orders().filter(function (o) { return o.status === 'due'; }).map(function (o) { return { id: o.id, order: o, monthLabel: monthOf(o.nextDue), dueTs: o.nextDue, amount: o.rent, lateFee: o.lateFee, tag: o.tag }; }).sort(function (a, b) { return a.dueTs - b.dueTs; });
+  }
+  function pay(ids, method) {
+    var s = load(), ts = Date.now(), txn = 'TXN' + String(Math.floor(1e9 + Math.random() * 9e9)), list = due().filter(function (d) { return ids.indexOf(d.id) >= 0; });
+    s.paid = s.paid || {}; s.extra = s.extra || [];
+    list.forEach(function (d) { s.paid[d.id] = { ts: ts, txn: txn }; s.extra.push({ orderId: d.id, ts: ts, method: method, txn: txn, amount: d.amount + d.lateFee, label: d.monthLabel.split(' ')[0] }); });
+    save(s); return { txn: txn, ts: ts, method: method, ids: list.map(function (d) { return d.id; }) };
+  }
+  function history() {
+    var s = load(), byId = {}; orders().forEach(function (o) { byId[o.id] = o; });
+    var seeds = M.history.map(function (h) { var o = byId[h.orderId], ts = base - h.ago * DAY; return o ? { orderId: h.orderId, ts: ts, method: h.method, txn: h.txn, amount: o.rent, label: MON[new Date(ts).getMonth()] } : null; }).filter(Boolean);
+    return (s.extra || []).map(function (x) { return x; }).concat(seeds).sort(function (a, b) { return b.ts - a.ts; });
+  }
+  window.RKMOCK = { orders: orders, due: due, pay: pay, history: history, reset: function () { try { localStorage.removeItem(KEY); } catch (e) {} }, byId: function (id) { return orders().filter(function (o) { return o.id === id; })[0]; } };
+})();
+
+</script>
+<script>
+/* ===== Orders page (/#orders), order details, Live Move-in Tracker, dashboard orders ===== */
+(function () {
+  'use strict';
+  var RK = window.RK, M = window.RKMOCK, CFG = window.RK_CONFIG || {};
   var $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); };
   var inr = function (n) { return '\u20b9' + Math.round(n).toLocaleString('en-IN'); };
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var toast = function (m) { if (window.rkToast) window.rkToast(m); };
   var DAY = 86400000, MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var fDate = function (t) { var d = new Date(t); return d.getDate() + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear(); };
   var fShort = function (t) { var d = new Date(t); return MON[d.getMonth()] + ' ' + d.getDate(); };
-  var STATUS = { progress: ['In progress', 'st-progress'], scheduled: ['Scheduled', 'st-scheduled'], delivered: ['Delivered', 'st-delivered'], cancelled: ['Cancelled', 'st-cancelled'] };
-  var ACTIVE = { progress: 1, scheduled: 1 };
-  var tab = 'all', cur = null;
+  var STATUS = { active: ['Active', 'st-active'], delivered: ['Delivered', 'st-delivered'], scheduled: ['Scheduled', 'st-scheduled'], completed: ['Completed', 'st-completed'], due: ['Rent due', 'st-due'], progress: ['In progress', 'st-progress'], cancelled: ['Cancelled', 'st-cancelled'] };
+  var ONGOING = { active: 1, delivered: 1, scheduled: 1, progress: 1 };
+  var TABS = [['all', 'All'], ['active', 'Active'], ['completed', 'Completed'], ['due', 'Rent Due']];
+  var tab = 'all', dtab = 'all', cur = null;
+  var inTab = function (o, t) { return t === 'all' || (t === 'active' ? !!ONGOING[o.status] : t === 'completed' ? (o.status === 'completed' || o.status === 'cancelled') : o.status === 'due'); };
+  var orders = function () { return M.orders(); };
+  var byId = function (id) { return orders().filter(function (o) { return o.id === id; })[0]; };
   var cityCode = function () { return (window.RKLOC && RKLOC.info().code) || 'GGN'; };
-  var findP = function (re) { return (D.products || []).filter(function (p) { return p.price && re.test(p.name); })[0]; };
 
-  /* ---------- order data: your real order (if any) + clearly-labelled sample history ---------- */
-  function line(p, tenure, qty) { return { id: p.id, name: p.name, img: p.images && p.images[0] ? 'images/' + p.images[0] : '', base12: p.price, tenure: tenure, qty: qty || 1 }; }
-  function money(items) { var t = RK.totals(items, null); return { rent: t.rent, dep: t.dep, total: t.total }; }
+  /* order placed through the real checkout (used by the Order Confirmed page only) */
   function realOrder() {
     var o = RK.state.order; if (!o || !o.items || !o.items.length) return null;
     var key = 'rk-order-meta', meta = null; try { meta = JSON.parse(sessionStorage.getItem(key) || 'null'); } catch (e) {}
     var sig = o.items.map(function (i) { return i.id + i.tenure + i.qty; }).join('|');
-    if (!meta || meta.sig !== sig) { var h = 0; for (var i = 0; i < sig.length; i++) h = (h * 31 + sig.charCodeAt(i)) % 90000; meta = { sig: sig, id: 'RNK-' + cityCode() + '-' + (10000 + h), ts: Date.now() - 2 * 3600000 }; try { sessionStorage.setItem(key, JSON.stringify(meta)); } catch (e) {} }
-    var t = RK.totals(o.items, o.coupon), tn = o.items.reduce(function (a, i) { return Math.max(a, i.tenure || 12); }, 0);
-    return { id: meta.id, ts: meta.ts, status: 'progress', items: o.items, tenure: tn, rent: t.rent, dep: t.dep, total: t.total, real: true };
+    if (!meta || meta.sig !== sig) { meta = { sig: sig, id: 'RNK-' + cityCode() + '-' + (10000 + sig.length * 37), ts: Date.now() - 2 * 3600000 }; try { sessionStorage.setItem(key, JSON.stringify(meta)); } catch (e) {} }
+    return { id: meta.id, ts: meta.ts, status: 'progress', items: o.items };
   }
-  function sampleOrders() {
-    var now = Date.now(), defs = [
-      { st: 'scheduled', ago: 1, tn: 9, items: [[/^Washing Machine \(Top Load/, 1], [/^Refrigerator 190 Litres/, 1]] },
-      { st: 'delivered', ago: 96, tn: 12, items: [[/^Celine Sofa 3 Seater/, 1], [/^Center Table Walnut Alpha/, 1], [/^32-inch LED TV/, 1]] },
-      { st: 'delivered', ago: 240, tn: 6, items: [[/^Study Table With Drawers/, 1], [/^Executive Chair/, 1]] },
-      { st: 'cancelled', ago: 62, tn: 3, items: [[/^Dining Table 4 Seater/, 1]] }
-    ], out = [], n = 0;
-    if (!realOrder()) defs.unshift({ st: 'progress', ago: 2, tn: 12, items: [[/^Double Bed Alpha 6x5/, 1], [/^Premium Ortho.*6x5/, 1], [/^Two Door Wardrobe Small/, 1]] });
-    defs.forEach(function (d) {
-      var items = d.items.map(function (x) { var p = findP(x[0]); return p ? line(p, d.tn, x[1]) : null; }).filter(Boolean); if (!items.length) return;
-      var m = money(items); n++;
-      out.push({ id: 'RNK-' + cityCode() + '-' + (84100 + n * 137 + d.ago), ts: now - d.ago * DAY - 3 * 3600000, status: d.st, items: items, tenure: d.tn, rent: m.rent, dep: m.dep, total: m.total, sample: true });
-    }); return out;
-  }
-  function orders() {
-    var l = [], r = realOrder(); if (r) l.push(r); if (!CFG.orders || CFG.orders.sample !== false) l = l.concat(sampleOrders());
-    return l.sort(function (a, b) { return b.ts - a.ts; });
-  }
-  var byId = function (id) { return orders().filter(function (o) { return o.id === id; })[0]; };
 
-  /* ---------- Orders page ---------- */
+  /* ---------- order card ---------- */
   function thumbs(o) {
     var t = o.items.slice(0, 3).map(function (i) { return '<span class="th">' + (i.img ? '<img src="' + esc(i.img) + '" alt="" loading="lazy" decoding="async">' : '<span class="material-symbols-outlined">chair</span>') + '</span>'; }).join('');
     return t + (o.items.length > 3 ? '<span class="th more">+' + (o.items.length - 3) + '</span>' : '');
   }
-  function card(o) {
-    var st = STATUS[o.status], first = o.items[0], extra = o.items.length - 1;
-    return '<article class="rk-oc"><div class="rk-oc-id"><b>#' + esc(o.id) + '</b><small>Placed ' + fDate(o.ts) + '</small><span class="rk-st ' + st[1] + '">' + st[0] + '</span></div>' +
-      '<div class="rk-oc-items"><div class="rk-oc-thumbs">' + thumbs(o) + '</div><div class="rk-oc-names"><b>' + esc(first.name) + '</b><small>' + (extra > 0 ? '+ ' + extra + ' more item' + (extra > 1 ? 's' : '') : (first.qty > 1 ? 'Qty ' + first.qty : '1 item')) + '</small></div></div>' +
-      '<dl class="rk-oc-stats"><div><dt>Tenure</dt><dd>' + o.tenure + ' months</dd></div><div><dt>Monthly rent</dt><dd>' + inr(o.rent) + '</dd></div><div><dt>Deposit</dt><dd>' + inr(o.dep) + '</dd></div><div><dt>Total paid</dt><dd>' + inr(o.total) + '</dd></div></dl>' +
-      '<div class="rk-oc-act"><button type="button" class="rk-btn pri" data-ord="track" data-id="' + esc(o.id) + '"><span class="material-symbols-outlined">local_shipping</span>Track order</button><button type="button" class="rk-btn sec" data-ord="details" data-id="' + esc(o.id) + '">View details</button></div></article>';
+  function card(o, compact) {
+    var st = STATUS[o.status] || STATUS.active, first = o.items[0], extra = o.items.length - 1, isDue = o.status === 'due';
+    var dueNote = isDue ? '<small class="rk-oc-due">' + (o.tag === 'overdue' ? 'Overdue \u00b7 ' : 'Due soon \u00b7 ') + 'Due ' + fDate(o.nextDue) + ' \u00b7 ' + inr(o.rent + o.lateFee) + '</small>' : '';
+    return '<article class="rk-oc' + (compact ? ' compact' : '') + '"><div class="rk-oc-id"><b>#' + esc(o.id) + '</b><small>Placed ' + fDate(o.ts) + '</small><span class="rk-st ' + st[1] + '">' + st[0] + '</span></div>' +
+      '<div class="rk-oc-items"><div class="rk-oc-thumbs">' + thumbs(o) + '</div><div class="rk-oc-names"><b>' + esc(first.name) + '</b><small>' + (extra > 0 ? '+ ' + extra + ' more item' + (extra > 1 ? 's' : '') : (first.qty > 1 ? 'Qty ' + first.qty : '1 item')) + '</small>' + dueNote + '</div></div>' +
+      '<dl class="rk-oc-stats"><div><dt>Tenure</dt><dd>' + o.tenure + ' months</dd></div><div><dt>Monthly rent</dt><dd>' + inr(o.rent) + '</dd></div><div><dt>Deposit</dt><dd>' + inr(o.dep) + '</dd></div><div><dt>Next due</dt><dd>' + (o.nextDue ? fDate(o.nextDue) : '\u2014') + '</dd></div></dl>' +
+      '<div class="rk-oc-act' + (isDue ? ' has-pay' : '') + '">' + (isDue ? '<button type="button" class="rk-btn red pay" data-pay="' + esc(o.id) + '"><span class="material-symbols-outlined">payments</span>Pay rent</button>' : '') +
+      '<button type="button" class="rk-btn pri" data-ord="track" data-id="' + esc(o.id) + '"><span class="material-symbols-outlined">local_shipping</span>Track order</button><button type="button" class="rk-btn sec" data-ord="details" data-id="' + esc(o.id) + '">View details</button></div></article>';
+  }
+  function tabsHTML(active, attr, all, idp) {
+    var cnt = {}; TABS.forEach(function (t) { cnt[t[0]] = all.filter(function (o) { return inTab(o, t[0]); }).length; });
+    return '<div class="rk-od-tabs" role="tablist" aria-label="Filter orders">' + TABS.map(function (t) { return '<button type="button" role="tab"' + (idp ? ' id="' + idp + t[0] + '"' : '') + ' aria-selected="' + (active === t[0]) + '" class="' + (active === t[0] ? 'on' : '') + '" data-ord="' + attr + '" data-v="' + t[0] + '">' + t[1] + '<span>' + cnt[t[0]] + '</span></button>'; }).join('') + '</div>';
   }
   function renderOrders() {
     var root = $('#rk-orders-root'); if (!root) return;
-    var all = orders(), list = all.filter(function (o) { return tab === 'all' || (tab === 'active' ? ACTIVE[o.status] : !ACTIVE[o.status]); });
-    var cnt = { all: all.length, active: all.filter(function (o) { return ACTIVE[o.status]; }).length }; cnt.completed = cnt.all - cnt.active;
-    var anySample = all.some(function (o) { return o.sample; });
+    var all = orders(), list = all.filter(function (o) { return inTab(o, tab); }), dueN = all.filter(function (o) { return o.status === 'due'; }).length;
     var empty = !all.length ? ['receipt_long', 'No orders yet', 'When you place your first rental, it will show up here with live tracking.']
-      : tab === 'active' ? ['inventory_2', 'No active orders right now', 'Orders that are being prepared or scheduled for delivery appear here.']
-      : ['task_alt', 'No completed orders yet', 'Delivered and cancelled orders will appear here.'];
+      : tab === 'active' ? ['inventory_2', 'No active orders right now', 'Orders being prepared, scheduled or in use appear here.']
+      : tab === 'completed' ? ['task_alt', 'No completed orders yet', 'Orders that reach the end of their tenure appear here.']
+      : ['task_alt', 'No rent due', 'You\u2019re all paid up. Your payment history is on the Pay rent page.'];
     root.innerHTML = '<nav class="rk-crumbs"><a data-path="home" href="#">Home</a><span>\u203a</span><a data-path="account" href="#">Account</a><span>\u203a</span><strong style="color:#001831">Orders</strong></nav>' +
-      '<div class="rk-od-head"><div><h1 class="rk-h2">Your orders</h1><p>' + all.length + ' order' + (all.length === 1 ? '' : 's') + (anySample ? ' \u00b7 includes sample orders for this demo' : '') + '</p></div></div>' +
-      '<div class="rk-od-tabs" role="tablist" aria-label="Filter orders">' + [['all', 'All'], ['active', 'Active'], ['completed', 'Completed']].map(function (t) { return '<button type="button" role="tab" id="rk-tab-' + t[0] + '" aria-selected="' + (tab === t[0]) + '" class="' + (tab === t[0] ? 'on' : '') + '" data-ord="tab" data-v="' + t[0] + '">' + t[1] + '<span>' + cnt[t[0]] + '</span></button>'; }).join('') + '</div>' +
-      (list.length ? '<div class="rk-od-colhead" aria-hidden="true"><span>Order</span><span>Items</span><span>Rental details</span><span></span></div><div class="rk-od-list" role="tabpanel" aria-labelledby="rk-tab-' + tab + '">' + list.map(card).join('') + '</div>'
-        : '<div class="rk-od-empty" role="tabpanel"><span class="material-symbols-outlined">' + empty[0] + '</span><b>' + empty[1] + '</b><p>' + empty[2] + '</p><button type="button" class="rk-btn pri lg" data-k="cat-go" data-v="all">Browse products</button></div>');
+      '<div class="rk-od-head"><div><h1 class="rk-h2">Your orders</h1><p>' + all.length + ' order' + (all.length === 1 ? '' : 's') + ' \u00b7 sample data for this demo</p></div>' + (dueN ? '<button type="button" class="rk-btn red" data-pay="all"><span class="material-symbols-outlined" style="font-size:18px">payments</span>Pay rent (' + dueN + ')</button>' : '') + '</div>' +
+      tabsHTML(tab, 'tab', all, 'rk-tab-') +
+      (list.length ? '<div class="rk-od-colhead" aria-hidden="true"><span>Order</span><span>Items</span><span>Rental details</span><span></span></div><div class="rk-od-list" role="tabpanel" aria-labelledby="rk-tab-' + tab + '">' + list.map(function (o) { return card(o); }).join('') + '</div>'
+        : '<div class="rk-od-empty" role="tabpanel"><span class="material-symbols-outlined">' + empty[0] + '</span><b>' + empty[1] + '</b><p>' + empty[2] + '</p>' + (tab === 'due' ? '<button type="button" class="rk-btn pri lg" data-pay="all">Payment history</button>' : '<button type="button" class="rk-btn pri lg" data-k="cat-go" data-v="all">Browse products</button>') + '</div>');
   }
 
   /* ---------- details dialog ---------- */
   var dlg = null, lastF = null;
   function closeDlg() { if (!dlg) return; dlg.remove(); dlg = null; document.documentElement.classList.remove('rk-lock'); if (lastF && lastF.focus) lastF.focus({ preventScroll: true }); }
   function details(id) {
-    var o = byId(id); if (!o) return; var st = STATUS[o.status]; lastF = document.activeElement; closeDlg();
-    var city = (window.RKLOC && RKLOC.get().city) || 'Gurgaon';
+    var o = byId(id); if (!o) return; var st = STATUS[o.status] || STATUS.active; lastF = document.activeElement; closeDlg();
+    var city = (window.RKLOC && RKLOC.get().city) || 'Gurgaon', isDue = o.status === 'due', R = { 12: 1, 9: 529 / 489, 6: 589 / 489, 3: 699 / 489 };
     dlg = document.createElement('div'); dlg.className = 'rk-modal';
     dlg.innerHTML = '<div class="rk-dialog rk-odlg" role="dialog" aria-modal="true" aria-labelledby="rk-odlg-t" tabindex="-1"><div class="rk-dh"><div><h2 id="rk-odlg-t">Order #' + esc(o.id) + '</h2><small style="color:#666">Placed ' + fDate(o.ts) + ' \u00b7 ' + esc(city) + '</small></div><button class="rk-x" type="button" data-ord="close" aria-label="Close"><span class="material-symbols-outlined">close</span></button></div>' +
-      '<span class="rk-st ' + st[1] + '">' + st[0] + '</span><ul class="rk-od-items">' + o.items.map(function (i) { var r = Math.round(i.base12 * ({ 12: 1, 9: 529 / 489, 6: 589 / 489, 3: 699 / 489 }[i.tenure] || 1) * (1 - (i.disc || 0))); return '<li><span class="th">' + (i.img ? '<img src="' + esc(i.img) + '" alt="" loading="lazy">' : '') + '</span><span class="nm"><b>' + esc(i.name) + '</b><small>' + (i.qty > 1 ? 'Qty ' + i.qty + ' \u00b7 ' : '') + i.tenure + ' months</small></span><span class="pr">' + inr(r * (i.qty || 1)) + '<small>/mo</small></span></li>'; }).join('') + '</ul>' +
-      '<dl class="rk-od-sum"><div><dt>Tenure</dt><dd>' + o.tenure + ' months</dd></div><div><dt>Monthly rent</dt><dd>' + inr(o.rent) + '</dd></div><div><dt>Refundable deposit</dt><dd>' + inr(o.dep) + '</dd></div><div class="tot"><dt>Total paid at checkout</dt><dd>' + inr(o.total) + '</dd></div></dl>' +
-      '<div class="rk-dbtn"><button type="button" class="rk-btn sec lg" data-ord="close">Close</button><button type="button" class="rk-btn pri lg" data-ord="track" data-id="' + esc(o.id) + '">Track order</button></div></div>';
+      '<span class="rk-st ' + st[1] + '">' + st[0] + '</span><ul class="rk-od-items">' + o.items.map(function (i) { var r = Math.round(i.base12 * (R[i.tenure] || 1)); return '<li><span class="th">' + (i.img ? '<img src="' + esc(i.img) + '" alt="" loading="lazy">' : '') + '</span><span class="nm"><b>' + esc(i.name) + '</b><small>' + (i.qty > 1 ? 'Qty ' + i.qty + ' \u00b7 ' : '') + i.tenure + ' months</small></span><span class="pr">' + inr(r * (i.qty || 1)) + '<small>/mo</small></span></li>'; }).join('') + '</ul>' +
+      '<dl class="rk-od-sum"><div><dt>Tenure</dt><dd>' + o.tenure + ' months</dd></div><div><dt>Monthly rent</dt><dd>' + inr(o.rent) + '</dd></div><div><dt>Refundable deposit</dt><dd>' + inr(o.dep) + '</dd></div><div><dt>Next due</dt><dd>' + (o.nextDue ? fDate(o.nextDue) : '\u2014') + '</dd></div>' + (isDue && o.lateFee ? '<div><dt>Late fee</dt><dd>' + inr(o.lateFee) + '</dd></div>' : '') + '<div class="tot"><dt>Paid at checkout</dt><dd>' + inr(o.total) + '</dd></div></dl>' +
+      '<div class="rk-dbtn">' + (isDue ? '<button type="button" class="rk-btn red lg" data-pay="' + esc(o.id) + '">Pay rent</button>' : '<button type="button" class="rk-btn sec lg" data-ord="close">Close</button>') + '<button type="button" class="rk-btn pri lg" data-ord="track" data-id="' + esc(o.id) + '">Track order</button></div></div>';
     document.body.appendChild(dlg); document.documentElement.classList.add('rk-lock'); $('.rk-dialog', dlg).focus();
     dlg.addEventListener('mousedown', function (e) { if (e.target === dlg) closeDlg(); });
   }
@@ -5492,58 +5760,350 @@ window.RK_ASSISTANT = {
 
   /* ---------- Live Move-in Tracker ---------- */
   var STEPS = [['task_alt', 'Order Placed', 'Payment verified via Razorpay'], ['assignment_turned_in', 'e-KYC Signed', 'Aadhaar DigiLocker verified'], ['sanitizer', 'Deep Sanitize & QA', '12-Point inspection & UV treatment'], ['local_shipping', 'Hub Dispatch', 'From {city} Hub'], ['door_front', 'White-Glove Setup', 'Delivery, room staging & unboxing']];
-  function stage(o) { return o.status === 'delivered' ? 5 : o.status === 'scheduled' ? 3 : 2; } // steps already completed
-  function times(o) {
-    var t = o.ts, d1 = t + DAY, active = o.status === 'progress';
-    return [fShort(t) + ' \u00b7 10:14 AM', fShort(t) + ' \u00b7 10:16 AM', active ? 'Active right now (3:30 PM)' : fShort(t) + ' \u00b7 3:30 PM', fShort(d1) + ' \u00b7 7:30 AM', fShort(d1) + ' \u00b7 9 AM \u2013 1 PM'];
-  }
+  var stage = function (o) { return o.status === 'progress' ? 2 : o.status === 'scheduled' ? 3 : 5; };
+  function times(o) { var t = o.ts, d1 = t + DAY, active = o.status === 'progress'; return [fShort(t) + ' \u00b7 10:14 AM', fShort(t) + ' \u00b7 10:16 AM', active ? 'Active right now (3:30 PM)' : fShort(t) + ' \u00b7 3:30 PM', fShort(d1) + ' \u00b7 7:30 AM', fShort(d1) + ' \u00b7 9 AM \u2013 1 PM']; }
   function trackerHTML(o) {
-    var done = stage(o), city = (window.RKLOC && RKLOC.get().city) || 'Gurgaon', tm = times(o), allDone = done >= 5;
+    var done = stage(o), city = (window.RKLOC && RKLOC.get().city) || 'Gurgaon', tm = times(o);
     return '<ol class="rk-trk" aria-label="Order progress">' + STEPS.map(function (s, i) {
       var st = i < done ? 'done' : (i === done ? 'active' : 'todo'), label = st === 'done' ? 'Completed' : st === 'active' ? 'In progress' : (i === 3 ? 'Scheduled' : 'Appointment');
       return '<li class="rk-trk-step st-' + st + '"' + (st === 'active' ? ' aria-current="step"' : '') + '><span class="rk-trk-ic"><span class="material-symbols-outlined">' + s[0] + '</span></span><div class="rk-trk-tx"><span class="rk-trk-lb">' + (st === 'active' ? '<i class="rk-trk-dot"></i>' : '') + label + '</span><h3>' + esc(s[1]) + '</h3><p>' + esc(s[2].replace('{city}', city)) + '</p><time>' + esc(tm[i]) + '</time></div></li>';
     }).join('') + '</ol>';
   }
   function renderTrack() {
-    var root = $('#rk-track-root'); if (!root) return; var o = cur ? byId(cur) : null; if (!o) { o = orders().filter(function (x) { return ACTIVE[x.status]; })[0] || orders()[0]; }
-    if (!o) { root.innerHTML = '<div class="rk-od-empty"><span class="material-symbols-outlined">receipt_long</span><b>No orders to track yet</b><p>Place an order and its live tracker will appear here.</p><button type="button" class="rk-btn pri lg" data-k="cat-go" data-v="all">Browse products</button></div>'; return; }
-    var st = STATUS[o.status];
+    var root = $('#rk-track-root'); if (!root) return; var o = cur ? byId(cur) : null; if (!o) o = orders().filter(function (x) { return ONGOING[x.status] || x.status === 'due'; })[0] || orders()[0];
+    if (!o) { root.innerHTML = '<div class="rk-od-empty"><span class="material-symbols-outlined">receipt_long</span><b>No orders to track yet</b><button type="button" class="rk-btn pri lg" data-k="cat-go" data-v="all">Browse products</button></div>'; return; }
+    var st = STATUS[o.status] || STATUS.active;
     root.innerHTML = '<nav class="rk-crumbs"><a data-path="home" href="#">Home</a><span>\u203a</span><button type="button" data-ord="back">Orders</button><span>\u203a</span><strong style="color:#001831">Track #' + esc(o.id) + '</strong></nav>' +
       '<section class="rk-trk-card"><div class="rk-trk-head"><div><span class="rk-trk-eye"><i></i>Real-time progression engine</span><h1>Live Move-in Tracker</h1></div><span class="rk-trk-pill"><span class="material-symbols-outlined">local_shipping</span>Standard 48-Hour Turnaround Protocol</span></div>' +
       '<div class="rk-trk-meta"><span>Order <b>#' + esc(o.id) + '</b></span><span>Placed ' + fDate(o.ts) + '</span><span class="rk-st ' + st[1] + '">' + st[0] + '</span></div>' + trackerHTML(o) +
-      '<div class="rk-trk-foot"><button type="button" class="rk-btn sec" data-ord="back">All orders</button><button type="button" class="rk-btn pri" data-ord="details" data-id="' + esc(o.id) + '">View details</button></div></section>';
+      '<div class="rk-trk-foot"><button type="button" class="rk-btn sec" data-ord="back">All orders</button>' + (o.status === 'due' ? '<button type="button" class="rk-btn red" data-pay="' + esc(o.id) + '">Pay rent</button>' : '') + '<button type="button" class="rk-btn pri" data-ord="details" data-id="' + esc(o.id) + '">View details</button></div></section>';
   }
   function renderConfirmTracker() { var m = $('#rk-tracker-confirm'); if (!m) return; var o = realOrder() || { ts: Date.now() - 2 * 3600000, status: 'progress', items: [] }; m.innerHTML = trackerHTML(o); }
 
-  /* ---------- account page: active order card ---------- */
+  /* ---------- dashboard: active order card, rent-due alert, orders list ---------- */
   function accountCard() {
-    var box = $('#acct-order'); if (!box) return; var o = orders().filter(function (x) { return ACTIVE[x.status]; })[0];
+    var box = $('#acct-order'); if (!box) return; var o = orders().filter(function (x) { return x.status !== 'completed' && x.status !== 'cancelled'; })[0];
     if (!o) { box.innerHTML = '<div class="rk-ao-empty"><span class="material-symbols-outlined">inventory_2</span><div><b>No active orders yet</b><small>Your next order will show up here with live tracking.</small></div><button type="button" class="rk-btn pri" data-k="cat-go" data-v="all">Browse products</button></div>'; return; }
-    var first = o.items[0], extra = o.items.length - 1, st = STATUS[o.status], done = stage(o);
-    box.innerHTML = '<div class="rk-ao"><div class="rk-ao-top"><span class="rk-st ' + st[1] + '">' + st[0] + '</span><small>#' + esc(o.id) + '</small></div><div class="rk-ao-main"><div class="rk-ao-img">' + (first.img ? '<img src="' + esc(first.img) + '" alt="" loading="lazy" decoding="async">' : '') + '</div><div><b>' + esc(first.name) + '</b><small>' + (extra > 0 ? '+ ' + extra + ' more item' + (extra > 1 ? 's' : '') + ' \u00b7 ' : '') + inr(o.rent) + '/mo \u00b7 Deposit ' + inr(o.dep) + '</small></div></div><div class="rk-ao-steps" aria-hidden="true">' + [0, 1, 2, 3, 4].map(function (i) { return '<i class="' + (i < done ? 'd' : i === done ? 'a' : '') + '"></i>'; }).join('') + '</div><div class="rk-ao-btns"><button type="button" class="rk-btn pri" data-ord="track" data-id="' + esc(o.id) + '">Track order</button><button type="button" class="rk-btn sec" data-ord="orders">All orders</button></div></div>';
+    var first = o.items[0], extra = o.items.length - 1, st = STATUS[o.status] || STATUS.active, done = stage(o);
+    box.innerHTML = '<div class="rk-ao"><div class="rk-ao-top"><span class="rk-st ' + st[1] + '">' + st[0] + '</span><small>#' + esc(o.id) + '</small></div><div class="rk-ao-main"><div class="rk-ao-img">' + (first.img ? '<img src="' + esc(first.img) + '" alt="" loading="lazy" decoding="async">' : '') + '</div><div><b>' + esc(first.name) + '</b><small>' + (extra > 0 ? '+ ' + extra + ' more item' + (extra > 1 ? 's' : '') + ' \u00b7 ' : '') + inr(o.rent) + '/mo \u00b7 Deposit ' + inr(o.dep) + '</small></div></div><div class="rk-ao-steps" aria-hidden="true">' + [0, 1, 2, 3, 4].map(function (i) { return '<i class="' + (i < done ? 'd' : i === done ? 'a' : '') + '"></i>'; }).join('') + '</div><div class="rk-ao-btns"><button type="button" class="rk-btn pri" data-ord="track" data-id="' + esc(o.id) + '">Track order</button>' + (o.status === 'due' ? '<button type="button" class="rk-btn red" data-pay="' + esc(o.id) + '">Pay rent</button>' : '<button type="button" class="rk-btn sec" data-ord="orders">All orders</button>') + '</div></div>';
+  }
+  function renderDash() {
+    accountCard();
+    var al = $('#rk-dash-alert'), due = M.due();
+    if (al) { var tot = due.reduce(function (a, d) { return a + d.amount + d.lateFee; }, 0), late = due.some(function (d) { return d.tag === 'overdue'; });
+      al.innerHTML = due.length ? '<div class="rk-alert" role="status"><span class="material-symbols-outlined">payments</span><div><b>Rent due: ' + inr(tot) + '</b><small>' + due.length + ' order' + (due.length === 1 ? '' : 's') + ' \u00b7 ' + (late ? 'includes an overdue payment' : 'due soon') + '</small></div><button type="button" class="rk-btn red" data-pay="all">Pay now</button></div>' : ''; }
+    var all = orders(), box = $('#rk-dash-orders');
+    if (box) {
+      var list = all.filter(function (o) { return inTab(o, dtab); }), shown = list.slice(0, 2);
+      box.innerHTML = tabsHTML(dtab, 'dtab', all, '') + (shown.length ? '<div class="rk-od-list">' + shown.map(function (o) { return card(o, true); }).join('') + '</div>' + (list.length > 2 ? '<button type="button" class="rk-btn sec rk-od-more" data-ord="orders">View all ' + list.length + ' orders</button>' : '')
+        : '<div class="rk-od-empty sm"><span class="material-symbols-outlined">receipt_long</span><b>' + (all.length ? 'Nothing here yet' : 'No orders yet') + '</b></div>');
+    }
   }
 
   /* ---------- events + hooks ---------- */
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-ord]'); if (!b) return; var k = b.dataset.ord, id = b.dataset.id;
     if (k === 'tab') { tab = b.dataset.v; renderOrders(); var t = $('#rk-tab-' + tab); if (t) t.focus({ preventScroll: true }); return; }
+    if (k === 'dtab') { dtab = b.dataset.v; renderDash(); var dt = $('#rk-dash-orders [data-v="' + dtab + '"]'); if (dt) dt.focus({ preventScroll: true }); return; }
     if (k === 'details') { details(id); return; }
     if (k === 'close') { closeDlg(); return; }
     if (k === 'orders' || k === 'back') { closeDlg(); RK.show('orders', { force: true }); return; }
-    if (k === 'track') { var o = byId(id); if (o && o.status === 'cancelled') { toast('This order was cancelled, so there is nothing to track.'); return; } closeDlg(); cur = id; RK.show('track', { force: true }); return; }
+    if (k === 'track') { closeDlg(); cur = id; RK.show('track', { force: true }); return; }
   });
+  document.addEventListener('click', function (e) { if (e.target.closest('[data-pay]')) closeDlg(); }, true);
   document.addEventListener('keydown', function (e) {
     if (!/^Arrow(Left|Right)$/.test(e.key) || !e.target.closest || !e.target.closest('.rk-od-tabs')) return;
-    var t = $$('.rk-od-tabs [role=tab]'), i = t.indexOf(document.activeElement); if (i < 0) return; var n = t[(i + (e.key === 'ArrowRight' ? 1 : -1) + t.length) % t.length]; tab = n.dataset.v; renderOrders(); var f = $('#rk-tab-' + tab); if (f) f.focus(); e.preventDefault();
+    var t = $$('.rk-od-tabs [role=tab]', e.target.closest('.rk-od-tabs')), i = t.indexOf(document.activeElement); if (i < 0) return; t[(i + (e.key === 'ArrowRight' ? 1 : -1) + t.length) % t.length].click(); e.preventDefault();
   });
   var prev = window.RKX && window.RKX.render;
   window.RKX = Object.assign(window.RKX || {}, { render: function (view) {
     if (prev) prev(view);
-    if (view === 'orders') renderOrders(); else if (view === 'track') renderTrack(); else if (view === 'confirm') renderConfirmTracker(); else if (view === 'dashboard') accountCard();
+    if (view === 'orders') renderOrders(); else if (view === 'track') renderTrack(); else if (view === 'confirm') renderConfirmTracker(); else if (view === 'dashboard') renderDash();
   } });
-  window.RKORD = { card: accountCard, orders: orders };
-  renderConfirmTracker(); accountCard();
-  if (RK.cur() === 'orders') renderOrders(); if (RK.cur() === 'track') renderTrack();
+  window.RKORD = { card: renderDash, orders: orders };
+  renderConfirmTracker(); renderDash();
+})();
+
+</script>
+<script>
+/* ===== Rent payment page (/#pay and /#pay/<orderId>), all mock ===== */
+(function () {
+  'use strict';
+  var RK = window.RK, M = window.RKMOCK;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); };
+  var inr = function (n) { return '\u20b9' + Math.round(n).toLocaleString('en-IN'); };
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var fDate = function (t) { var d = new Date(t); return d.getDate() + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear(); };
+  var fTime = function (t) { var d = new Date(t), h = d.getHours(), m = d.getMinutes(); return (h % 12 || 12) + ':' + (m < 10 ? '0' : '') + m + ' ' + (h >= 12 ? 'PM' : 'AM'); };
+  var APPS = ['Google Pay', 'PhonePe', 'Paytm'], BANKS = ['HDFC Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Kotak Mahindra'];
+  var active = false, sel = {}, method = 'upi', f = { upi: '', app: '', num: '', exp: '', cvv: '', name: '', bank: '' }, phase = 'form', result = null, err = '';
+  var names = function (o) { return o.items.length > 1 ? o.items[0].name + ' + ' + (o.items.length - 1) + ' more' : o.items[0].name; };
+
+  function init() {
+    var due = M.due(), p = window.__rkPay, one = p && due.filter(function (d) { return d.id === p; })[0];
+    sel = {}; if (one) sel[p] = true; else due.forEach(function (d) { sel[d.id] = true; });
+    phase = 'form'; result = null; err = '';
+  }
+  function chosen() { return M.due().filter(function (d) { return sel[d.id]; }); }
+  function totals() { var c = chosen(), rent = 0, late = 0; c.forEach(function (d) { rent += d.amount; late += d.lateFee; }); return { n: c.length, rent: rent, late: late, total: rent + late }; }
+
+  function dueHTML() {
+    var due = M.due();
+    if (!due.length) return '<div class="rk-od-empty sm"><span class="material-symbols-outlined">task_alt</span><b>You\u2019re all paid up</b><small>No rent is due right now.</small></div>';
+    return '<div class="rk-due-list">' + due.map(function (d) {
+      var tag = d.tag === 'overdue' ? '<span class="rk-dtag late">Overdue</span>' : '<span class="rk-dtag soon">Due soon</span>';
+      return '<label class="rk-due"><input type="checkbox" data-pay-chk value="' + esc(d.id) + '"' + (sel[d.id] ? ' checked' : '') + '><span class="rk-due-main"><b>#' + esc(d.id) + '</b><small>' + esc(names(d.order)) + '</small><small>' + esc(d.monthLabel) + ' rent \u00b7 Due ' + fDate(d.dueTs) + '</small></span><span class="rk-due-amt"><b>' + inr(d.amount + d.lateFee) + '</b>' + tag + '</span></label>';
+    }).join('') + '</div>';
+  }
+  function upiPanel() {
+    return '<div class="rk-fld"><label for="rk-upi">UPI ID</label><input id="rk-upi" data-pay-f="upi" value="' + esc(f.upi) + '" placeholder="name@bank" autocomplete="off" inputmode="email"></div><p class="rk-hint" style="margin:0 0 8px">Or pay with an app</p><div class="rk-apps" role="group" aria-label="UPI apps">' + APPS.map(function (a) { return '<button type="button" class="rk-chip' + (f.app === a ? ' on' : '') + '" data-pay-app="' + esc(a) + '" aria-pressed="' + (f.app === a) + '">' + esc(a) + '</button>'; }).join('') + '</div>';
+  }
+  function cardPanel() {
+    return '<div class="rk-fld"><label for="rk-cn">Card number</label><input id="rk-cn" data-pay-f="num" value="' + esc(f.num) + '" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" maxlength="19"></div>' +
+      '<div class="rk-two" style="grid-template-columns:1fr 1fr"><div class="rk-fld"><label for="rk-ce">Expiry</label><input id="rk-ce" data-pay-f="exp" value="' + esc(f.exp) + '" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5"></div><div class="rk-fld"><label for="rk-cv">CVV</label><input id="rk-cv" data-pay-f="cvv" value="' + esc(f.cvv) + '" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="3"></div></div>' +
+      '<div class="rk-fld"><label for="rk-cnm">Name on card</label><input id="rk-cnm" data-pay-f="name" value="' + esc(f.name) + '" autocomplete="cc-name" placeholder="Naman"></div>';
+  }
+  function netPanel() {
+    return '<p class="rk-hint" style="margin:0 0 8px">Choose your bank</p><div class="rk-apps" role="radiogroup" aria-label="Banks">' + BANKS.map(function (b) { return '<button type="button" class="rk-chip' + (f.bank === b ? ' on' : '') + '" role="radio" aria-checked="' + (f.bank === b) + '" data-pay-bank="' + esc(b) + '">' + esc(b) + '</button>'; }).join('') + '</div>';
+  }
+  function methodsHTML() {
+    var tabs = [['upi', 'UPI', 'account_balance_wallet'], ['card', 'Card', 'credit_card'], ['net', 'Netbanking', 'account_balance']];
+    return '<section class="rk-dsec"><h2 class="rk-dsec-h">Payment method</h2><div class="rk-pm-tabs" role="tablist">' + tabs.map(function (t) { return '<button type="button" role="tab" aria-selected="' + (method === t[0]) + '" class="' + (method === t[0] ? 'on' : '') + '" data-pay-m="' + t[0] + '"><span class="material-symbols-outlined">' + t[2] + '</span>' + t[1] + '</button>'; }).join('') + '</div><div role="tabpanel">' + (method === 'upi' ? upiPanel() : method === 'card' ? cardPanel() : netPanel()) + '</div></section>';
+  }
+  function sumHTML() {
+    var t = totals(), c = chosen();
+    return '<aside class="rk-pay-sum"><div class="rk-dsec"><h2 class="rk-dsec-h">Summary</h2><dl class="rk-od-sum"><div><dt>Rent (' + t.n + ' order' + (t.n === 1 ? '' : 's') + ')</dt><dd>' + inr(t.rent) + '</dd></div>' +
+      c.filter(function (d) { return d.lateFee; }).map(function (d) { return '<div class="late"><dt>Late fee \u00b7 #' + esc(d.id.slice(-5)) + '</dt><dd>' + inr(d.lateFee) + '</dd></div>'; }).join('') +
+      '<div class="tot"><dt>Total payable</dt><dd>' + inr(t.total) + '</dd></div></dl><p class="rk-err" role="alert" style="margin:0 0 8px">' + esc(err) + '</p><button type="button" class="rk-btn red lg" data-pay-go style="width:100%"' + (t.total ? '' : ' disabled') + '>Pay ' + inr(t.total) + '</button><p class="rk-hint" style="margin:10px 0 0;text-align:center">Demo payment. No money moves.</p></div></aside>';
+  }
+  function historyHTML() {
+    var h = M.history();
+    return '<section class="rk-dsec rk-hist"><h2 class="rk-dsec-h">Payment history</h2>' + (h.length ? '<ul class="rk-hist-list">' + h.map(function (p) {
+      return '<li><span class="a"><b>#' + esc(p.orderId) + '</b><small>' + esc(p.label) + ' rent \u00b7 ' + esc(p.method) + '</small></span><span class="b"><b>' + inr(p.amount) + '</b><small>' + fDate(p.ts) + '</small></span><span class="c"><small>' + esc(p.txn) + '</small><i class="rk-dtag paid">Paid</i></span></li>';
+    }).join('') + '</ul>' : '<div class="rk-od-empty sm"><b>No payments yet</b></div>') + '</section>';
+  }
+  function successHTML() {
+    var r = result;
+    return '<section class="rk-pay-ok"><span class="ok-ic"><span class="material-symbols-outlined">check_circle</span></span><h1>Payment successful</h1><p class="amt">' + inr(r.total) + '</p><dl class="rk-od-sum"><div><dt>Transaction ID</dt><dd>' + esc(r.txn) + '</dd></div><div><dt>Date</dt><dd>' + fDate(r.ts) + ', ' + fTime(r.ts) + '</dd></div><div><dt>Paid via</dt><dd>' + esc(r.method) + '</dd></div><div><dt>Orders</dt><dd>' + r.ids.map(function (id) { return '#' + esc(id); }).join(', ') + '</dd></div></dl>' +
+      '<div class="rk-dbtn"><button type="button" class="rk-btn sec lg" data-pay-rcpt><span class="material-symbols-outlined" style="font-size:18px">download</span>Download receipt</button><button type="button" class="rk-btn pri lg" data-pay-nav="orders">View orders</button></div><button type="button" class="rk-link" data-pay-nav="dashboard" style="margin-top:12px">Back to dashboard</button></section>';
+  }
+  function render() {
+    var root = $('#rk-pay-root'); if (!root) return;
+    var head = '<nav class="rk-crumbs"><a data-path="home" href="#">Home</a><span>\u203a</span><a data-path="account" href="#">Account</a><span>\u203a</span><strong style="color:#001831">Pay rent</strong></nav>';
+    if (phase === 'success') { root.innerHTML = head + successHTML() + historyHTML(); return; }
+    root.innerHTML = head + '<div class="rk-od-head"><div><h1 class="rk-h2">Pay rent</h1><p>Pay one or several orders at once.</p></div></div><div class="rk-pay-grid"><div class="rk-pay-main"><section class="rk-dsec"><h2 class="rk-dsec-h">Rent due</h2>' + dueHTML() + '</section>' + methodsHTML() + '</div>' + sumHTML() + '</div>' + historyHTML();
+  }
+  function fail(m) { err = m; render(); }
+  function go() {
+    var t = totals(); err = '';
+    if (!t.n || !t.total) return fail('Select at least one order to pay.');
+    if (method === 'upi') { if (!f.app && !/^[a-zA-Z0-9._-]{2,}@[a-zA-Z]{2,}$/.test(f.upi.trim())) return fail('Enter a valid UPI ID or pick an app.'); }
+    else if (method === 'card') {
+      if (f.num.replace(/\s/g, '').length !== 16) return fail('Enter a valid 16-digit card number.');
+      var mm = /^(\d{2})\/(\d{2})$/.exec(f.exp); if (!mm || +mm[1] < 1 || +mm[1] > 12) return fail('Enter the expiry as MM/YY.');
+      if (f.cvv.length !== 3) return fail('Enter the 3-digit CVV.'); if (f.name.trim().length < 2) return fail('Enter the name on the card.');
+    } else if (!f.bank) return fail('Choose your bank.');
+    var btn = $('[data-pay-go]'); if (btn) { btn.disabled = true; btn.innerHTML = '<span class="rk-spin"></span>Processing\u2026'; }
+    var ids = chosen().map(function (d) { return d.id; }), label = method === 'upi' ? 'UPI' : method === 'card' ? 'Card' : 'Netbanking';
+    setTimeout(function () {
+      var r = M.pay(ids, label); r.total = t.total; r.rent = t.rent; r.late = t.late; result = r; phase = 'success'; render(); window.scrollTo(0, 0);
+    }, 1500);
+  }
+  function receipt() {
+    var r = result; if (!r) return;
+    var lines = ['RENTICKLE - RENT RECEIPT (demo)', '', 'Transaction ID: ' + r.txn, 'Date: ' + fDate(r.ts) + ' ' + fTime(r.ts), 'Paid via: ' + r.method, 'Customer: Naman, +91 91302 08733', '', 'Orders: ' + r.ids.join(', '), 'Rent: ' + inr(r.rent), 'Late fee: ' + inr(r.late), 'Total paid: ' + inr(r.total), '', 'This is a demo receipt. No payment was made.'];
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/plain' })); a.download = 'Rentickle-receipt-' + r.txn + '.txt'; document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+
+  document.addEventListener('click', function (e) {
+    var p = e.target.closest('[data-pay]');
+    if (p) { window.__rkPay = p.dataset.pay === 'all' ? '' : p.dataset.pay; active = false; RK.show('pay', { force: true }); return; }
+    if (RK.cur() !== 'pay') return;
+    var m = e.target.closest('[data-pay-m]'); if (m) { method = m.dataset.payM; err = ''; render(); return; }
+    var a = e.target.closest('[data-pay-app]'); if (a) { f.app = f.app === a.dataset.payApp ? '' : a.dataset.payApp; err = ''; render(); return; }
+    var b = e.target.closest('[data-pay-bank]'); if (b) { f.bank = b.dataset.payBank; err = ''; render(); return; }
+    if (e.target.closest('[data-pay-go]')) { go(); return; }
+    if (e.target.closest('[data-pay-rcpt]')) { receipt(); return; }
+    var n = e.target.closest('[data-pay-nav]'); if (n) { RK.show(n.dataset.payNav, { force: true }); return; }
+  });
+  document.addEventListener('change', function (e) { var c = e.target.closest && e.target.closest('[data-pay-chk]'); if (!c || RK.cur() !== 'pay') return; sel[c.value] = c.checked; err = ''; render(); });
+  document.addEventListener('input', function (e) {
+    var i = e.target; if (!i.dataset || i.dataset.payF === undefined) return; var k = i.dataset.payF, v = i.value;
+    if (k === 'num') { v = v.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim(); i.value = v; }
+    if (k === 'exp') { v = v.replace(/\D/g, '').slice(0, 4); if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2); i.value = v; }
+    if (k === 'cvv') { v = v.replace(/\D/g, '').slice(0, 3); i.value = v; }
+    f[k] = v;
+  });
+  var prev = window.RKX && window.RKX.render;
+  window.RKX = Object.assign(window.RKX || {}, { render: function (view) {
+    if (prev) prev(view);
+    if (view === 'pay') { if (!active) { active = true; init(); } render(); } else active = false;
+  } });
+})();
+
+</script>
+<script>
+/* ===== Header "Account" dropdown: Dashboard, Orders, Pay Rent, Settings, Logout ===== */
+(function () {
+  'use strict';
+  var RK = window.RK, $ = function (s, r) { return (r || document).querySelector(s); };
+  var fmt = function (d) { return d && d.length === 10 ? '+91 ' + d.slice(0, 5) + ' ' + d.slice(5) : '+91 91302 08733'; };
+  function who() {
+    var p = null; try { p = JSON.parse(localStorage.getItem('rk-profile') || 'null'); } catch (e) {}
+    p = p || { name: 'Naman', phone: '9130208733' };
+    var n = $('#rk-who-n'), t = $('#rk-who-p'); if (n) n.textContent = p.name || 'Naman'; if (t) t.textContent = fmt(p.phone);
+  }
+  function closeMenu() { var m = $('#rk-acct-menu'), b = $('#rk-acct-btn'); if (m) m.hidden = true; if (b) b.setAttribute('aria-expanded', 'false'); }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#rk-acct-btn')) who();
+    var b = e.target.closest('[data-acct]'); if (!b) return; var k = b.dataset.acct; closeMenu();
+    if (k === 'dashboard') RK.show('dashboard', { force: true });
+    else if (k === 'orders') RK.show('orders', { force: true });
+    else if (k === 'pay') { window.__rkPay = ''; RK.show('pay', { force: true }); }
+    else if (k === 'settings') RK.show('settings', { force: true });
+    else if (k === 'logout') { if (window.RKAUTH) RKAUTH.signOut(); }
+  });
+  who();
+})();
+
+</script>
+<script>
+/* ===== Round 6: navigation (history + back bar) and demo sign-in ===== */
+(function () {
+  'use strict';
+  var RK = window.RK, CFG = window.RK_CONFIG || {}, API = (CFG.api && CFG.api.baseUrl) || '';
+  var $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); };
+  var toast = function (m) { if (window.rkToast) window.rkToast(m); };
+  var LS = { get: function (k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }, set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }, del: function (k) { try { localStorage.removeItem(k); } catch (e) {} } };
+
+  /* ---------- history: every page change is a history entry, so browser/hardware back works ---------- */
+  window.addEventListener('popstate', function (e) { window.__rkDepth = (e.state && e.state.d) || 0; });
+  function back() { if ((window.__rkDepth || 0) > 0) history.back(); else RK.show('home', { force: true, noPush: true }); }
+
+  /* ---------- back bar (mobile) on every full-screen page ---------- */
+  var TITLES = { category: 'Catalogue', product: 'Product', planner: 'Smart bundles', cart: 'Cart', kyc: 'Checkout', confirm: 'Order confirmed', dashboard: 'Account', settings: 'Settings', orders: 'Orders', track: 'Live tracker', pay: 'Pay rent' };
+  $$('main[data-view]').forEach(function (m) {
+    var v = m.dataset.view; if (v === 'home' || $('.rk-backbar', m)) return;
+    var b = document.createElement('div'); b.className = 'rk-backbar';
+    b.innerHTML = '<button type="button" data-nav="back" aria-label="Go back"><span class="material-symbols-outlined">arrow_back</span></button><b>' + (TITLES[v] || '') + '</b><button type="button" data-nav="home" aria-label="Home"><span class="material-symbols-outlined">home</span></button>';
+    m.insertBefore(b, m.firstChild);
+  });
+  document.addEventListener('click', function (e) {
+    var n = e.target.closest('[data-nav]'); if (!n) return;
+    if (n.dataset.nav === 'back') back(); else RK.show('home', { force: true });
+  });
+
+  /* ---------- demo sign-in (no SMS is sent; any 6 digits are accepted unless api.baseUrl is set) ---------- */
+  var GUARD = {};
+  var session = { phone: '9130208733', at: Date.now() }, pendingView = null, dlg = null, lastF = null, phone = '';
+  var signedIn = function () { return !!(session && session.phone); };
+  function normPhone(v) { var s0 = String(v).trim(), d = s0.replace(/\D/g, ''); if (/^\+/.test(s0)) { if (d.indexOf('91') === 0) d = d.slice(2); } else if (d.length === 12 && d.indexOf('91') === 0) d = d.slice(2); else if (d.length === 11 && d[0] === '0') d = d.slice(1); return d; }
+  var fmt = function (d) { return d.length === 10 ? '+91 ' + d.slice(0, 5) + ' ' + d.slice(5) : d; };
+  function api(path, body) { return fetch(API + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'include', body: JSON.stringify(body) }).then(function (r) { if (!r.ok) return r.json().catch(function () { return {}; }).then(function (j) { throw new Error(j.message || 'Request failed'); }); return r.status === 204 ? null : r.json().catch(function () { return null; }); }); }
+  function close() { if (!dlg) return; dlg.remove(); dlg = null; document.documentElement.classList.remove('rk-lock'); if (lastF && lastF.focus) lastF.focus({ preventScroll: true }); }
+  function setErr(msg) { var e = $('#rk-au-e'); if (e) e.textContent = msg || ''; var i = $('#rk-au-in'); if (i) { i.classList.toggle('bad', !!msg); i.setAttribute('aria-invalid', msg ? 'true' : 'false'); } }
+  function busy(btn, on, t) { btn.disabled = on; if (on) { btn.dataset.t = btn.innerHTML; btn.innerHTML = '<span class="rk-spin"></span>' + t; } else if (btn.dataset.t) btn.innerHTML = btn.dataset.t; }
+  function stepPhone() {
+    $('.rk-au-body', dlg).innerHTML = '<p class="rk-hint">Use your mobile number.</p><div class="rk-fld"><label for="rk-au-in">Mobile number</label><div class="rk-au-ph"><span>+91</span><input id="rk-au-in" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="98765 43210" aria-describedby="rk-au-e"></div><p class="rk-err" id="rk-au-e" role="alert"></p></div><button type="button" class="rk-btn red lg" style="width:100%" id="rk-au-go">Send OTP</button><p class="rk-hint" style="margin-top:12px">' + (API ? '' : 'Demo sign-in: no SMS is sent.') + '</p>';
+    var i = $('#rk-au-in'); i.value = phone; i.focus();
+    var go = function () { var d = normPhone(i.value); if (!/^[6-9]\d{9}$/.test(d)) { setErr('Enter a valid 10-digit mobile number starting with 6-9.'); return; } setErr(''); phone = d; var b = $('#rk-au-go'); busy(b, true, 'Sending\u2026');
+      (API ? api('/auth/otp/send', { phone: d }) : new Promise(function (r) { setTimeout(r, 450); })).then(function () { stepOtp(); }, function (er) { busy(b, false); setErr(er.message || 'Could not send the code. Try again.'); }); };
+    $('#rk-au-go').addEventListener('click', go); i.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+  }
+  function stepOtp() {
+    $('.rk-au-body', dlg).innerHTML = '<p class="rk-hint">Enter the 6-digit code sent to <b>' + esc(fmt(phone)) + '</b>.</p><div class="rk-fld"><label for="rk-au-in">Verification code</label><input id="rk-au-in" class="rk-au-otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="\u2022 \u2022 \u2022 \u2022 \u2022 \u2022" aria-describedby="rk-au-e"><p class="rk-err" id="rk-au-e" role="alert"></p></div><button type="button" class="rk-btn red lg" style="width:100%" id="rk-au-go">Verify</button><div class="rk-au-links"><button type="button" class="rk-link" id="rk-au-chg">Change number</button></div><p class="rk-hint">' + (API ? '' : 'Demo: any 6 digits work.') + '</p>';
+    var i = $('#rk-au-in'); i.focus();
+    var go = function () { var c = i.value.trim(); if (!/^\d{6}$/.test(c)) { setErr('Enter the 6-digit code.'); return; } setErr(''); var b = $('#rk-au-go'); busy(b, true, 'Verifying\u2026');
+      (API ? api('/auth/otp/verify', { phone: phone, otp: c }) : new Promise(function (r) { setTimeout(r, 450); })).then(function () { done(); }, function (er) { busy(b, false); setErr(er.message || 'That code did not work.'); }); };
+    $('#rk-au-go').addEventListener('click', go); i.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); go(); } }); $('#rk-au-chg').addEventListener('click', stepPhone);
+  }
+  function done() {
+    session = { phone: phone, at: Date.now() }; LS.set('rk-session', session); var dest = pendingView || 'dashboard'; pendingView = null; close();
+    document.dispatchEvent(new CustomEvent('rk:signin', { detail: { phone: phone } })); toast('Signed in.'); RK.show(dest, { force: true });
+  }
+  function open(o) {
+    if (dlg) return; pendingView = (o && o.after) || 'dashboard'; lastF = document.activeElement;
+    dlg = document.createElement('div'); dlg.className = 'rk-modal';
+    dlg.innerHTML = '<div class="rk-dialog rk-au" role="dialog" aria-modal="true" aria-labelledby="rk-au-t"><div class="rk-dh"><h2 id="rk-au-t">Sign in</h2><button class="rk-x" type="button" data-au="close" aria-label="Close"><span class="material-symbols-outlined">close</span></button></div><div class="rk-au-body"></div></div>';
+    document.body.appendChild(dlg); document.documentElement.classList.add('rk-lock'); stepPhone();
+    dlg.addEventListener('mousedown', function (e) { if (e.target === dlg) close(); }); dlg.addEventListener('click', function (e) { if (e.target.closest('[data-au=close]')) close(); });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (!dlg) return; if (e.key === 'Escape') { close(); return; }
+    if (e.key === 'Tab') { var f = $$('button,input,a[href]', dlg).filter(function (x) { return x.offsetParent !== null && !x.disabled; }); if (!f.length) return; var i = f.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { f[f.length - 1].focus(); e.preventDefault(); } else if (!e.shiftKey && i === f.length - 1) { f[0].focus(); e.preventDefault(); } }
+  });
+  function signOut() { if (window.RKMOCK) RKMOCK.reset(); toast('Demo reset. You stay signed in as Naman.'); RK.show('home', { force: true }); }
+  function account() { RK.show('dashboard', { force: true }); }
+
+  /* signed-out visitors cannot stay on account pages */
+  var prev = window.RKX && window.RKX.render;
+  window.RKX = Object.assign(window.RKX || {}, { render: function (view) {
+    if (GUARD[view] && !signedIn()) { RK.show('home', { force: true, noPush: true }); open({ after: view }); return; }
+    if (prev) prev(view);
+  } });
+  window.RKAUTH = { account: account, open: open, signedIn: signedIn, signOut: signOut, phone: function () { return session ? session.phone : ''; } };
+  window.RKNAV = { back: back };
+})();
+
+</script>
+<script>
+/* ===== Round 6: guided tour ("What's improved") ===== */
+(function () {
+  'use strict';
+  var RK = window.RK, $ = function (s, r) { return (r || document).querySelector(s); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var KEY = 'rk-tour-seen', isM = function () { return window.innerWidth <= 767; };
+  var STEPS = [
+    { sel: '#categories-browser .rk-cm', text: '12 categories, one tap away.' },
+    { sel: '#rk-flip', text: 'Plan your move-in in two steps.' },
+    { sel: function () { return isM() ? '#rk-bnav [data-bn=help]' : '#rk-assistant-btn'; }, text: 'Ask the assistant anything.' },
+    { sel: '#rk-acct-btn', text: 'Orders and live tracking live here.' },
+    { sel: '#rk-city-btn', text: 'Switch city in one tap.' },
+    { sel: '.rk-ic[aria-label="Cart"]', text: 'Coupons are in your cart.' },
+    { sel: '#rk-bnav', text: 'Built for mobile too.', mobile: true }
+  ];
+  var root, spot, card, steps = [], i = 0, active = false, lastF = null, raf = 0;
+  function seen() { try { localStorage.setItem(KEY, '1'); } catch (e) {} }
+  function target() { var s = steps[i].sel; s = typeof s === 'function' ? s() : s; return document.querySelector(s); }
+  function place() {
+    raf = 0; if (!active) return; var t = target(); if (!t) return; var r = t.getBoundingClientRect(), pad = 8, vw = innerWidth, vh = innerHeight;
+    spot.style.cssText = 'left:' + (r.left - pad) + 'px;top:' + (r.top - pad) + 'px;width:' + (r.width + pad * 2) + 'px;height:' + (r.height + pad * 2) + 'px';
+    if (isM()) {
+      var hdr = ($('header') || { getBoundingClientRect: function () { return { bottom: 100 }; } }).getBoundingClientRect().bottom, mid = r.top + r.height / 2;
+      card.style.left = '12px'; card.style.right = '12px'; card.style.width = 'auto'; card.style.transform = '';
+      if (mid > vh * 0.5) { card.style.top = (hdr + 12) + 'px'; card.style.bottom = 'auto'; } else { card.style.bottom = '84px'; card.style.top = 'auto'; }
+    } else {
+      var w = 320, ch = card.offsetHeight || 150, below = r.bottom + pad + 14 + ch < vh, left = Math.min(Math.max(16, r.left + r.width / 2 - w / 2), vw - w - 16);
+      card.style.width = w + 'px'; card.style.right = 'auto'; card.style.bottom = 'auto'; card.style.left = left + 'px'; card.style.top = (below ? r.bottom + pad + 14 : Math.max(16, r.top - pad - 14 - ch)) + 'px';
+    }
+  }
+  function queue() { if (!raf) raf = requestAnimationFrame(place); }
+  function render() {
+    var s = steps[i], last = i === steps.length - 1;
+    card.innerHTML = '<div class="rk-tr-top"><span class="rk-tr-prog" aria-label="Step ' + (i + 1) + ' of ' + steps.length + '">' + steps.map(function (_, k) { return '<i class="' + (k === i ? 'on' : k < i ? 'done' : '') + '"></i>'; }).join('') + '</span><span class="rk-tr-n">' + (i + 1) + ' / ' + steps.length + '</span></div><p class="rk-tr-t" id="rk-tr-t">' + esc(s.text) + '</p><div class="rk-tr-btns"><button type="button" class="rk-link" data-tr="skip">Skip</button><span><button type="button" class="rk-btn sec" data-tr="back"' + (i === 0 ? ' disabled' : '') + '>Back</button><button type="button" class="rk-btn pri" data-tr="next">' + (last ? 'Done' : 'Next') + '</button></span></div>';
+    var t = target(); if (t) { var fixed = false, p = t; while (p && p !== document.body) { if (getComputedStyle(p).position === 'fixed') { fixed = true; break; } p = p.parentElement; } if (!fixed) t.scrollIntoView({ block: 'center', behavior: 'auto' }); }
+    place(); setTimeout(place, 60); var nb = card.querySelector('[data-tr=next]'); if (nb) nb.focus({ preventScroll: true });
+  }
+  function end() { if (!active) return; active = false; seen(); root.remove(); root = null; document.documentElement.classList.remove('rk-lock'); window.removeEventListener('resize', queue); window.removeEventListener('scroll', queue, true); if (lastF && lastF.focus) lastF.focus({ preventScroll: true }); }
+  function go(d) { var n = i + d; if (n >= steps.length) { end(); return; } if (n < 0) return; i = n; while (!target() && i + d >= 0 && i + d < steps.length) i += d; render(); }
+  function start() {
+    if (active) return; if (RK.cur() !== 'home') RK.show('home', { force: true });
+    steps = STEPS.filter(function (s) { return !s.mobile || isM(); }); i = 0; active = true; lastF = document.activeElement;
+    root = document.createElement('div'); root.className = 'rk-tour'; root.setAttribute('role', 'dialog'); root.setAttribute('aria-modal', 'true'); root.setAttribute('aria-labelledby', 'rk-tr-t');
+    spot = document.createElement('div'); spot.className = 'rk-tour-spot'; card = document.createElement('div'); card.className = 'rk-tour-card';
+    root.appendChild(spot); root.appendChild(card); document.body.appendChild(root); document.documentElement.classList.add('rk-lock');
+    root.addEventListener('click', function (e) { var b = e.target.closest('[data-tr]'); if (!b) return; var k = b.dataset.tr; if (k === 'skip') end(); else if (k === 'next') go(1); else if (k === 'back') go(-1); });
+    window.addEventListener('resize', queue); window.addEventListener('scroll', queue, true); setTimeout(render, 120);
+  }
+  document.addEventListener('keydown', function (e) { if (!active) return; if (e.key === 'Escape') end(); else if (e.key === 'ArrowRight') go(1); else if (e.key === 'ArrowLeft') go(-1); });
+  document.addEventListener('click', function (e) { if (e.target.closest('[data-tour]')) { e.preventDefault(); start(); } });
+  window.RKTOUR = { start: start };
+  var done = false; try { done = localStorage.getItem(KEY) === '1'; } catch (e) {}
+  if (!done) setTimeout(function () { if (RK.cur() === 'home' && !document.querySelector('.rk-modal') && !document.querySelector('#location-modal-overlay:not(.hidden)')) start(); }, 1600);
 })();
 
 </script>
